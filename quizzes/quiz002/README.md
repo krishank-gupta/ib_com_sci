@@ -4,6 +4,7 @@ I misunderstood the quiz a little bit and what I did is significantly harder but
 
 Link to the code: (remember to scroll)
 
+https://github.com/krishank-gupta/ib_com_sci/blob/1d08e04535a1f111a485b91ee4f568724be5762c/quizzes/quiz002/quiz002-code.py#1-27
 
 Here are the results of the test cases. [10,30,10,26, 20,15,5,-6]
 

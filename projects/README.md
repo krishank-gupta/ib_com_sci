@@ -22,9 +22,9 @@ Justify the tools/structure of your solution
 1. The electronic ledger is a text-based software (Runs in the Terminal).
 2. The electronic ledger display the basic description of the cyrptocurrency selected.
 3. The electronic ledger allows to enter, withdraw and record transactions.
-4.
-5.
-6.
+4. The electronic ledger calculates important data and shows the data using graphs.
+5. The electronic ledger gives statistics including profit/loss and suggests to buy/sell.
+6. The electronic ledger prints losses in red color, profits in green color.
 
 # Criteria B: Design
 
@@ -36,5 +36,5 @@ Justify the tools/structure of your solution
 ## Record of Tasks
 | Task No | Planned Action                                                | Planned Outcome                                                                                                 | Time estimate | Target completion date | Criterion |
 |---------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
-| 1       | Create system diagram                                         | To have a clear idea of the hardware and software requirements for the proposed solution                        | 10min         | September 22                 | B         |
-
+| 1       | Create system diagram                                         | To have a clear idea of the hardware and software requirements for the proposed solution                        | 15min         | September 22                 | B         |
+| 2       | Meet with client                                         | To have a list of things the ledger should be able to do approved by the client                        | 15min         | September 23                 | A         |

@@ -13,10 +13,6 @@ def login(username, pswd):
 
     if username == stored_username and pswd == stored_pswd:
         return True
-        print(f"""{cc['green']}{hashLine}
-#{"Login Success".center(centerVal-2)}#
-{hashLine}{cc['end_code']}""".center(centerVal))
-
     else:
         print(f"{cc['red']}Username and password don't match!{cc['end_code']}")
     

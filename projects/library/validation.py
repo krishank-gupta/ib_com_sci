@@ -17,7 +17,7 @@ def validate_int_between(msg, startNum, endNum, inputColor):
             else:
                 print(f"{cc['red']}Please enter a number between {startNum} and {endNum}{cc['end_code']}")
         except ValueError:
-            print(f"{cc['red']}Please enter a integer{cc['end_code']}")
+            print(f"{cc['red']}Please enter an integer{cc['end_code']}")
 
 
 def validate_str(msg,inputColor):

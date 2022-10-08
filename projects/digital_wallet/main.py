@@ -1,7 +1,8 @@
 # imports
-from library.library import hashLine,centerVal,colorCodes as cc, validate_int, validate_int_between, validate_str
+from library.library import hashLine,centerVal,colorCodes as cc, validate_int, validate_int_between, validate_str, validate_date
 from library.login import login, signup
-# important variables
+import texttable as tt
+
 
 # prints
 loginOptions = ['1. Register', '2. Login']
@@ -36,8 +37,9 @@ def loginSystem():
         loginMessage = f"""{cc['purple']}{hashLine}\n#{"Login".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal)
         # loginMessage = 'login'
         print(loginMessage)
+
         while(login(getUsername(), getPswd()) == False):
-            login(getUsername(), getPswd())
+            pass
 
         print(f"""{cc['green']}{hashLine}\n#{"Login Success".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
 
@@ -57,23 +59,39 @@ def menu():
             print("usd coin is a bs")
 
         if menuChoice == 2:
-            
-
-
             print("enter a transaction")
-
             categories = ['Expenses', 'incomes']
+            dateInput = (validate_date("Please enter date: ", "purple"))
+            descInput = (validate_str("Please enter description: ", "purple"))
+            categoryInput = (validate_str("Please enter category: ", "purple"))
+            amountInput = (validate_int("Please enter amount: ", "purple"))
 
+            with open("data/transactions.csv", 'a') as f:
+                f.write('\n')
+                f.write(dateInput + ',')
+                f.write(descInput + ',')
+                f.write(categoryInput + ',')
+                f.write(str(amountInput) + 'USD Coin')
+            f.close()
 
         if menuChoice == 3:
             print("withdraw transaction")
 
         if menuChoice == 4:
-            print('see all transactions')
+            tb = tt.Texttable()
             with open("data/transactions.csv", 'r') as file:
                 transactionDb = file.readlines()
+                print(f"""{cc['purple']}{hashLine}\n#{"All data".center(centerVal-2)}#{cc['end_code']}""")
                 for line in transactionDb:
-                    print(line.strip().split(','))
+                    data = line.strip().split(',')
+                    tb.header(["Date", "Description", "Category", "Amount"])
+                    # center val 80
+                    tb.add_row([data[0],data[1], data[2],data[3]])
+                    tb.set_cols_width([centerVal/5-1,centerVal/2-1,centerVal/8-1,centerVal/8])
+
+                
+            tb.set_chars(['-', '#', '#', '='])
+            print(f"{cc['red']}{tb.draw()}\n{hashLine}{cc['end_code']}")
             file.close()
 
         if menuChoice == 5:
@@ -82,12 +100,9 @@ def menu():
         if menuChoice == 6:
             quit()
         
-        break
-
-        # print(menuOptionsPrint) 
-        # menuChoice = validate_int_between('Choose an option: ', 1,6, "blue")    
+        print(menuOptionsPri nt) 
+        menuChoice = validate_int_between('Choose an option: ', 1,6, "blue")    
         
-
 # MAIN
 # if(loginSystem() == True):
     # menu()

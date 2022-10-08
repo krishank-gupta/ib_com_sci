@@ -1,3 +1,5 @@
+import datetime
+
 colorCodes = {
     # NORMAL
     'black': '\33[0;30m',
@@ -69,6 +71,17 @@ def validate_str(msg,inputColor):
         else:
             print(f"{cc['red']}Please enter a string{cc['end_code']}")
 
+def validate_date(msg, inputColor):
+    while True:
 
-centerVal = 80
+        try:
+            date_text = input(f"{cc[inputColor]}{msg}{cc['end_code']}")
+            datetime.datetime.strptime(date_text, '%Y-%m-%d')
+            break
+        except ValueError:
+            print("Incorrect data format, should be YYYY-MM-DD")
+
+    return date_text
+
+centerVal = int(80)
 hashLine = '#'*centerVal

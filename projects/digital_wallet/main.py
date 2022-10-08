@@ -60,38 +60,73 @@ def menu():
 
         if menuChoice == 2:
             print("enter a transaction")
-            categories = ['Expenses', 'incomes']
-            dateInput = (validate_date("Please enter date: ", "purple"))
+            dateInput = (validate_date("Please enter date: (YYYY-MM-DD)", "purple"))
             descInput = (validate_str("Please enter description: ", "purple"))
-            categoryInput = (validate_str("Please enter category: ", "purple"))
+            categoryOptions = ['1. Expense', '2. Income']
+            categoryOptionsPrint = (f"""{cc['purple']}{hashLine}\n#{"Choose an option.".center(centerVal-2)}#\n# {categoryOptions[0]}{"".center(centerVal-int(len(categoryOptions[0]))-3)}#\n# {categoryOptions[1]}{"".center(centerVal-int(len(categoryOptions[1]))-3)}#\n{hashLine}{cc['end_code']}""")
+            print(categoryOptionsPrint)
+            categoryInput = (validate_int_between("Please enter category from option: ",1, len(categoryOptions), "purple"))
             amountInput = (validate_int("Please enter amount: ", "purple"))
 
             with open("data/transactions.csv", 'a') as f:
                 f.write('\n')
                 f.write(dateInput + ',')
                 f.write(descInput + ',')
-                f.write(categoryInput + ',')
+                f.write(categoryOptions[categoryInput-1] + ',')
                 f.write(str(amountInput) + 'USD Coin')
             f.close()
 
+            print(f"""{cc['green']}{hashLine}\n#{"Transaction Added Successfully".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
+
+
         if menuChoice == 3:
-            print("withdraw transaction")
+            tb = tt.Texttable()
+            updateTransactionRecordsList = []
+
+            with open("data/transactions.csv", 'r') as file:
+                transactionDb = file.readlines()
+
+                while(len(transactionDb) != 0):
+                    for idx,line in enumerate(transactionDb):
+                        data = line.strip().split(",")
+                        tb.header(["ID","Date", "Description", "Category", "Amount"])
+                        tb.add_row([int(idx)+1,data[0],data[1], data[2],data[3]])
+                        tb.set_cols_width([3,13-1,25-1,13-1,13])
+
+                    tb.set_chars(['-', '#', '#', '='])
+                    print(f"{cc['yellow']}{tb.draw()}\n{hashLine}{cc['end_code']}")
+
+                    removeID = validate_int_between("Please enter the ID of transaction you wish to remove: ", 1, len(transactionDb), 'blue') - 1
+
+                    for idx,line in enumerate(transactionDb):
+                        if idx != removeID:
+                            updateTransactionRecordsList.append(line)
+            file.close()
+
+            with open("data/transactions.csv", 'w') as empty_csv:
+                pass
+
+            with open("data/transactions.csv", 'a') as f:
+                for i in updateTransactionRecordsList:
+                    f.write(i)
+            f.close()            
+
+            print(f"""{cc['green']}{hashLine}\n#{"Transaction Removed Successfully".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
 
         if menuChoice == 4:
             tb = tt.Texttable()
             with open("data/transactions.csv", 'r') as file:
                 transactionDb = file.readlines()
-                print(f"""{cc['purple']}{hashLine}\n#{"All data".center(centerVal-2)}#{cc['end_code']}""")
+                print(f"""{cc['yellow']}{hashLine}\n#{"All data".center(centerVal-2)}#{cc['end_code']}""")
                 for line in transactionDb:
                     data = line.strip().split(',')
                     tb.header(["Date", "Description", "Category", "Amount"])
-                    # center val 80
                     tb.add_row([data[0],data[1], data[2],data[3]])
-                    tb.set_cols_width([centerVal/5-1,centerVal/2-1,centerVal/8-1,centerVal/8])
+                    tb.set_cols_width([13-1,27-1,15-1,15])
 
                 
             tb.set_chars(['-', '#', '#', '='])
-            print(f"{cc['red']}{tb.draw()}\n{hashLine}{cc['end_code']}")
+            print(f"{cc['yellow']}{tb.draw()}\n{hashLine}{cc['end_code']}")
             file.close()
 
         if menuChoice == 5:
@@ -100,7 +135,7 @@ def menu():
         if menuChoice == 6:
             quit()
         
-        print(menuOptionsPri nt) 
+        print(menuOptionsPrint) 
         menuChoice = validate_int_between('Choose an option: ', 1,6, "blue")    
         
 # MAIN

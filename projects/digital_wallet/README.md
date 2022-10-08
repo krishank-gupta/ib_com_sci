@@ -41,6 +41,10 @@ Justify the tools/structure of your solution
 
 ## Flow Diagrams
 
+Login System
+
+![login_system](/projects/digital_wallet/flowcharts/Login%20system.drawio.png)
+
 
 ## Record of Tasks
 | Task No | Planned Action             | Planned Outcome                                                                          | Time estimate | Target completion date | Criterion |

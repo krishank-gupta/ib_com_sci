@@ -131,6 +131,7 @@ def menu():
 
         if menuChoice == 5:
             print('profits and loss')
+            
 
         if menuChoice == 6:
             quit()

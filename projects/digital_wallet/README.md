@@ -43,7 +43,7 @@ Justify the tools/structure of your solution
 
 Login System
 
-![login_system](/projects/digital_wallet/flowcharts/Login%20system.drawio.png)
+![login_system](/projects/digital_wallet/flowcharts/login_system.png)
 
 
 ## Record of Tasks

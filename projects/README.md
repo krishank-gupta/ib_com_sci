@@ -1,8 +1,5 @@
 # Crypto Wallet
 
-![](22ROOSE-master768.gif)  
-<sub>Illustration for Glenn Harvey</sub>
-
 # Criteria A: Planning
 
 ## Problem definition
@@ -11,11 +8,23 @@ Ms. Sato is a local trader who is interested in the emerging market of cryptocur
 
 Apart for this requirements, Ms Sato is open to explore a cryptocurrency selected by the developer.
 
+An example of the data stored is 
+
+| Date | Description | Category | Amount  |
+|------|-------------|----------|---------|
+| Sep 23 2022 | bought a house | Expenses | 10 BTC |
+| Sep 24 2022 | food for house celebration | Food | 0.000001 BTC |
+
 ## Proposed Solution
 
 Design statement:
-I will to design and make a ———— for a client who is ———. The ——– will about USD Coin and is constructed using the software Python. It will take  ———- to make and will be evaluated according to the criteria ———.
+I will to design and make a digital ledger for a client who is Ms. Sato The digital ledger will be about USD Coin and is constructed using the software Python. It will take  3-4 weeks to make and will be evaluated according to the following success criteria.
 
+USD Coin:
+USD Coin is a digital stablecoin that was pegged to the United States dollar. USD Coin is managed by a consortium called Centre, which was founded by Circle and includes members from the cryptocurrency exchange Coinbase and Bitcoin mining company Bitmain, an investor in Circle.
+
+Python:
+why python because
 Justify the tools/structure of your solution
 
 ## Success Criteria
@@ -34,7 +43,10 @@ Justify the tools/structure of your solution
 
 
 ## Record of Tasks
-| Task No | Planned Action                                                | Planned Outcome                                                                                                 | Time estimate | Target completion date | Criterion |
-|---------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
-| 1       | Create system diagram                                         | To have a clear idea of the hardware and software requirements for the proposed solution                        | 15min         | September 22                 | B         |
-| 2       | Meet with client                                         | To have a list of things the ledger should be able to do approved by the client                        | 15min         | September 23                 | A         |
+| Task No | Planned Action             | Planned Outcome                                                                          | Time estimate | Target completion date | Criterion |
+|---------|----------------------------|------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
+| 1       | Create system diagram      | To have a clear idea of the hardware and software requirements for the proposed solution | 15min         | September 22           | B         |
+| 2       | Meet with client           | To have a list of things the ledger should be able to do approved by the client          | 15min         | September 23           | A         |
+| 3       | Create description of coin | To have a clear description of USD Coin                                                  | 10min         | September 25           | A         |
+| 4       | Decide tools to use        | To decide what tools like software will be best for the needs of the client              | 20min         | September 25           | A         |
+| 5       | Create login system        | To have the ledger password protected for the user                                       | 20min         | September 28           | C         |

@@ -42,13 +42,13 @@ For this software, I will be using Python 3.10.6. I will be running it on Visual
 
 ## System Diagram
 
-![system_diagram](/projects/digital_wallet/flowcharts/system-diagram.png)
+![system_diagram](/projects/digital_wallet/img/system-diagram.png)
 
 ## Flow Diagrams
 
 Login System
 
-![login_system](/projects/digital_wallet/flowcharts/login_system.png)
+![login_system](/projects/digital_wallet/img/login_system.png)
 
 
 ## Record of Tasks
@@ -73,3 +73,72 @@ Testing any software is a very important step in the creation of the software. I
 |    5   | Withdraw all transactions.                              | Pption to remove transaction disappears when last transaction is removed.                         |
 |    6   | Add multiple transactions and check profit/loss system. | Losses print in red, profits print in green.                                                      |
 |    7   | Test exit mode.                                         | Program quits.                                                                                    |
+
+
+# Criteria C: Development
+
+## Use of Git and Github
+
+The entire software was coded from scratch using Visual Studio Code. Upon completion of every single task, git was updated. Code was uploaded to Github using the Github CLI. 
+
+## Use of For Loops
+
+```.py
+
+
+
+
+```
+
+## Use of functions
+
+Functions were used throughout the software. An example is in the login system, functions were used to process login or signup requests. These functions had the parameters of username and password. Signup function created an account using the params submitted and appended to the users.csv database. Login function took the params and crosschecked every line in the database to find a match. The function returned True if match was found and False if it wasn't.
+
+```.py
+signup(getUsername(), getPswd())
+
+def signup(username, pswd):
+    with open("credentials.csv", 'a') as f:
+        f.write('\n')
+        f.write(username + ',')
+        f.write(pswd)
+    f.close()
+
+def login(username, pswd):
+    with open("credentials.csv", 'r') as f:
+        database = f.readlines()
+        for line in database:
+            stored_username, stored_pswd = line.strip().split(',')
+            
+            if username == stored_username and pswd == stored_pswd:
+                return True
+
+    f.close()
+
+    print(f"{cc['red']}Username and password don't match!{cc['end_code']}")
+    return False
+
+```
+
+# Sources 
+
+Code on how to remove row from csv file inspired by Serge de Gosson de Varennes on [stackoverflow](https://stackoverflow.com/a/33164330)
+
+```.py
+lines = list()
+remove= [1,2,3,4]
+
+with open('dataset1.csv', 'r') as read_file:
+    reader = csv.reader(read_file)
+    for row_number, row in enumerate(reader, start=1):
+        if(row_number not in remove):
+            lines.append(row)
+
+with open('new_csv.csv', 'w') as write_file:
+    writer = csv.writer(write_file)
+    writer.writerows(lines)
+```
+
+
+
+

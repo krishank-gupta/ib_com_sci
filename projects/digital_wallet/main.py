@@ -46,7 +46,7 @@ def loginSystem():
         return True
 
 def menu():
-    menuOptions = ["1. See description of USD Coin", "2. Enter a transaction", "3. Withdraw a transaction", "4. see all transaction", "5. Profit/loss calculator", "6. Exit"]
+    menuOptions = ["1. See description of USD Coin", "2. Enter a transaction", "3. Withdraw a transaction", "4. See all transaction", "5. Profit/loss calculator", "6. Exit"]
 
     menuOptionsPrint = (f"""{cc['purple']}{hashLine}\n#{"Choose an option.".center(centerVal-2)}#\n# {menuOptions[0]}{"".center(centerVal-int(len(menuOptions[0]))-3)}#\n# {menuOptions[1]}{"".center(centerVal-int(len(menuOptions[1]))-3)}#\n# {menuOptions[2]}{"".center(centerVal-int(len(menuOptions[2]))-3)}#\n# {menuOptions[3]}{"".center(centerVal-int(len(menuOptions[3]))-3)}#\n# {menuOptions[4]}{"".center(centerVal-int(len(menuOptions[4]))-3)}#\n# {menuOptions[5]}{"".center(centerVal-int(len(menuOptions[5]))-3)}#\n{hashLine}{cc['end_code']}""")
 
@@ -148,12 +148,11 @@ def menu():
                         print("error")
                 
             if cashInHand > 0:
-                print(f"profit of {cashInHand}. Sell more.")
-            else:
-                print(f"loss of {cashInHand}. Buy more")
+                print(f"""{cc['green']}{hashLine}\n#{f"Profit of {cashInHand}. Crypty suggests selling more USD Coin".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
 
-            # tb.set_chars(['-', '#', '#', '='])
-            # print(f"{cc['yellow']}{tb.draw()}\n{hashLine}{cc['end_code']}")
+            else:
+                print(f"""{cc['red']}{hashLine}\n#{f"Loss of {cashInHand}. Crypty suggests buying more USD Coin".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
+
             file.close()            
 
         if menuChoice == 6:
@@ -162,8 +161,5 @@ def menu():
         print(menuOptionsPrint) 
         menuChoice = validate_int_between('Choose an option: ', 1,6, "blue")    
         
-# MAIN
-# if(loginSystem() == True):
-    # menu()
-
-menu()
+if(loginSystem() == True):
+    menu()

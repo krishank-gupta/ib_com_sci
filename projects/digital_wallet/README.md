@@ -50,6 +50,13 @@ Login System
 
 ![login_system](/projects/digital_wallet/img/login_system.png)
 
+See all transactions
+
+![all_transactions_display](/projects/digital_wallet/img/see-transactions.png)
+
+Profit Loss Calculator
+
+![profit_loss_calc](/projects/digital_wallet/img/profit-loss-calc.png)
 
 ## Record of Tasks
 
@@ -150,6 +157,9 @@ def login(username, pswd):
 
 ```
 
+# Video of working software
+[![Watch the video](https://img.youtube.com/vi/ho77mAAGPVE/maxresdefault.jpg)](https://youtu.be/ho77mAAGPVE)
+
 # Sources 
 
 Code on how to remove row from csv file inspired by Serge de Gosson de Varennes on [stackoverflow](https://stackoverflow.com/a/33164330)
@@ -168,7 +178,3 @@ with open('new_csv.csv', 'w') as write_file:
     writer = csv.writer(write_file)
     writer.writerows(lines)
 ```
-
-
-
-

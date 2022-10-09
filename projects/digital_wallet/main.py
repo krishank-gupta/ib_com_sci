@@ -56,10 +56,11 @@ def menu():
     while(True):
 
         if menuChoice == 1:
-            print("usd coin is a bs")
+            print(f"""{cc['purple']}{hashLine}\n# USD Coin is a digital stablecoin that was pegged to the United States dollar #\n{hashLine}{cc['end_code']}""".center(centerVal))
+
+
 
         if menuChoice == 2:
-            print("enter a transaction")
             dateInput = (validate_date("Please enter date: (YYYY-MM-DD)", "purple"))
             descInput = (validate_str("Please enter description: ", "purple"))
             categoryOptions = ['1. Expense', '2. Income']
@@ -82,8 +83,8 @@ def menu():
             tb = tt.Texttable()
             updateTransactionRecordsList = []
 
-            with open("data/transactions.csv", 'r') as file:
-                transactionDb = file.readlines()
+            with open("data/transactions.csv", 'r') as data_file:
+                transactionDb = data_file.readlines()
 
                 while(len(transactionDb) != 0):
                     for idx,line in enumerate(transactionDb):
@@ -100,7 +101,7 @@ def menu():
                     for idx,line in enumerate(transactionDb):
                         if idx != removeID:
                             updateTransactionRecordsList.append(line)
-            file.close()
+            data_file.close()
 
             with open("data/transactions.csv", 'w') as empty_csv:
                 pass

@@ -17,16 +17,16 @@ An example of the data stored is
 
 ## Proposed Solution
 
-Design statement:
+### Design statement:
 I will to design and make a digital ledger for a client who is Ms. Sato The digital ledger will be about USD Coin and is constructed using the software Python. It will take  3-4 weeks to make and will be evaluated according to the following success criteria.
 
-Description of Cryptocurrency:
+### Description of Cryptocurrency:
 USD Coin is a digital stablecoin that was pegged to the United States dollar. USD Coin is managed by a consortium called Centre, which was founded by Circle and includes members from the cryptocurrency exchange Coinbase and Bitcoin mining company Bitmain, an investor in Circle.
 
-Description of the software:
+### Description of my software:
 This software is called Crypty. It is used to track transactions of the cryptocurrency USD Coin as per my client's needs. It lets the user create an account or login. It then lets the user enter a transaction, remove a transaction, see all past transactions, see profits or losses depending on entered transactions, and presents all these information in an easy to understand manner. All system messages are displayed in purple. Success messages and error messages are displayed in green and red respectively. Messages were an input is required from the user is displayed in blue color. All messages are displayed inside boxes to make it clear and easy to understand.
 
-Justification:
+### Justification:
 For this software, I will be using Python 3.10.6. I will be running it on Visual Studio Code 1.71.2 on a Mac OS Big Sur. I will be using Python because my client needs a software that will be based on the terminal and can be run without internet. Python can easily run on the terminal without the use of internet. Additionally, my client needed the software to be password protected. Using python I can easily make a login/signup system that can password protect and encrypt sensitive information that my user will enter. Furthermore, Python is easy and fast, and the amount of libraries python has makes any task possible. The use of libraries not only expands the scope of python, but also helps in making the development process faster and making the user experience much better. I will run Python on Visual Studio Code as I have been using VS Code for years now and am very comfortable using it. The VS Code extensions I have makes my development process faster and makes debugging simple. Additionally, VS Code runs my software in lightning speed. The reason I will use a Mac OS is because I own a MacBook Air. However, it can easily be runned on windows or linux.
 
 
@@ -41,6 +41,8 @@ For this software, I will be using Python 3.10.6. I will be running it on Visual
 # Criteria B: Design
 
 ## System Diagram
+
+![system_diagram](/projects/digital_wallet/flowcharts/system-diagram.png)
 
 ## Flow Diagrams
 
@@ -62,8 +64,12 @@ Login System
 
 Testing any software is a very important step in the creation of the software. In most cases, testing is done by a person who is neither the client nor the developer so they can test all cases of the software without having any biases and having enough knowledge to test properly. This prevents crashed and bugs after the software's launch. To test my software, I have created a table of inputs and expected outputs.
 
-1. Action: Multiple Registrations. Expected output: Multiple successful registrations. Notes: Try to match one username with another user's password.
-2. Action: Enter unexpected input for register/login options. Expected output: error message with clear message and how to fix. 
-3. Action: Enter unexpected input for menu options. Expected output: error message with clear message and how to fix.
-4. Action: Test all menu options. Expected output: as per menu option
-5. Action: Withdraw all transactions. Expected output: option to remove transaction disappears when last transaction is removed.
+| Number |                          Action                         |                                          Expected output                                          |
+|:------:|:-------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
+|    1   | Multiple registrations.                                 | Multiple successful registrations. Notes: Try to match one username with another user's password. |
+|    2   | Enter unexpected input for register/login options.      | Error message with clear message and how to fix.                                                  |
+|    3   | Enter unexpected input for menu options.                | Error message with clear message and how to fix.                                                  |
+|    4   | Test all menu options.                                  | As per menu options.                                                                              |
+|    5   | Withdraw all transactions.                              | Pption to remove transaction disappears when last transaction is removed.                         |
+|    6   | Add multiple transactions and check profit/loss system. | Losses print in red, profits print in green.                                                      |
+|    7   | Test exit mode.                                         | Program quits.                                                                                    |

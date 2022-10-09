@@ -73,7 +73,7 @@ def menu():
                 f.write(dateInput + ',')
                 f.write(descInput + ',')
                 f.write(categoryOptions[categoryInput-1] + ',')
-                f.write(str(amountInput) + 'USD Coin')
+                f.write(str(amountInput) + ' USD Coin')
             f.close()
 
             print(f"""{cc['green']}{hashLine}\n#{"Transaction Added Successfully".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
@@ -130,8 +130,31 @@ def menu():
             file.close()
 
         if menuChoice == 5:
-            print('profits and loss')
-            
+
+            tb = tt.Texttable()
+            cashInHand = int(0)
+            with open("data/transactions.csv", 'r') as file:
+                transactionDb = file.readlines()
+                # print(f"""{cc['yellow']}{hashLine}\n#{"All data".center(centerVal-2)}#{cc['end_code']}""")
+                for line in transactionDb:
+                    data = line.strip().split(',')
+                    amount = int(str(data[3]).split(' ')[0])
+                    tb.header(["Date", "Description", "Category", "Amount"])
+                    if data[2] == '2. Income':
+                        cashInHand += amount
+                    elif data[2] == '1. Expense':
+                        cashInHand -= amount
+                    else:
+                        print("error")
+                
+            if cashInHand > 0:
+                print(f"profit of {cashInHand}. Sell more.")
+            else:
+                print(f"loss of {cashInHand}. Buy more")
+
+            # tb.set_chars(['-', '#', '#', '='])
+            # print(f"{cc['yellow']}{tb.draw()}\n{hashLine}{cc['end_code']}")
+            file.close()            
 
         if menuChoice == 6:
             quit()

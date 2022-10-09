@@ -52,13 +52,21 @@ Login System
 
 
 ## Record of Tasks
-| Task No | Planned Action             | Planned Outcome                                                                          | Time estimate | Target completion date | Criterion |
-|---------|----------------------------|------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
-| 1       | Create system diagram      | To have a clear idea of the hardware and software requirements for the proposed solution | 15min         | September 22           | B         |
-| 2       | Meet with client           | To have a list of things the ledger should be able to do approved by the client          | 15min         | September 23           | A         |
-| 3       | Create description of coin | To have a clear description of USD Coin                                                  | 10min         | September 25           | A         |
-| 4       | Decide tools to use        | To decide what tools like software will be best for the needs of the client              | 20min         | September 25           | A         |
-| 5       | Create login system        | To have the ledger password protected for the user                                       | 20min         | September 28           | C         |
+
+| Task No | Planned Action                | Planned Outcome                                                                          | Time estimate | Target completion date | Criterion |
+|---------|-------------------------------|------------------------------------------------------------------------------------------|---------------|------------------------|-----------|
+| 1       | Create system diagram         | To have a clear idea of the hardware and software requirements for the proposed solution | 15min         | September 22           | B         |
+| 2       | Meet with client              | To have a list of things the ledger should be able to do approved by the client          | 15min         | September 23           | A         |
+| 3       | Create description of coin    | To have a clear description of USD Coin                                                  | 10min         | September 25           | A         |
+| 4       | Decide tools to use           | To decide what tools like software will be best for the needs of the client              | 20min         | September 25           | A         |
+| 5       | Create login system           | To have the ledger password protected for the user                                       | 20min         | September 28           | C         |
+| 6       | Create menu                   | To have the menu of options displayed after successful login                             | 3hr           | October 5              | C         |
+| 7       | Design Profit/Loss Calculator | To have the software calculate profits and losses based on transaction records           | 20min         | October 2              | C         |
+| 8       | Add flowcharts                | To draw flocharts of some essential processes in the software                            | 20min         | October 4              | B         |
+| 9       | Add code snippets             | To show proof of usage of functions, loops, conditions, validation, etc                  | 20min         | October 7              | C         |
+| 10      | Add testing                   | To have a list of action and expected outcomes for tester                                | 30min         | October 7              | B         |
+| 11      | Add sources                   | To credit the usage of code written by other people                                      | 10min         | October 7              | C         |
+| 12      | Git push!                     | Upload project to github                                                                 | 5min          | October 9              | C         |
 
 ## Testing
 
@@ -81,15 +89,37 @@ Testing any software is a very important step in the creation of the software. I
 
 The entire software was coded from scratch using Visual Studio Code. Upon completion of every single task, git was updated. Code was uploaded to Github using the Github CLI. 
 
-## Use of For Loops
+## Use of Loops
+
+For and While loops were used throughout the software. An example is when reading csv file. I loop through every line in database and process the data.
 
 ```.py
 
-
-
+for line in transactionDb:
+    data = line.strip().split(',')
+    tb.header(["Date", "Description", "Category", "Amount"])
+    tb.add_row([data[0],data[1], data[2],data[3]])
 
 ```
 
+## Use of Data Validation
+
+All input datas had to be validated to prevent unhandled errors. I created a function that validated data according to the data type and saved it in the library file. Whenever I had to validate data, I called the function.
+
+```.py
+# library.py
+
+def validate_int_between(msg, startNum, endNum, inputColor):
+    while True:
+        try:
+            val = int(input(f"{cc[inputColor]}{msg}{cc['end_code']}"))
+            if val >= startNum and val <= endNum:
+                return val
+            else:
+                print(f"{cc['red']}Please enter a number between {startNum} and {endNum}{cc['end_code']}")
+        except ValueError:
+            print(f"{cc['red']}Please enter an integer{cc['end_code']}")
+```
 ## Use of functions
 
 Functions were used throughout the software. An example is in the login system, functions were used to process login or signup requests. These functions had the parameters of username and password. Signup function created an account using the params submitted and appended to the users.csv database. Login function took the params and crosschecked every line in the database to find a match. The function returned True if match was found and False if it wasn't.

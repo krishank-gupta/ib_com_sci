@@ -78,7 +78,6 @@ def menu():
 
             print(f"""{cc['green']}{hashLine}\n#{"Transaction Added Successfully".center(centerVal-2)}#\n{hashLine}{cc['end_code']}""".center(centerVal))
 
-
         if menuChoice == 3:
             tb = tt.Texttable()
             updateTransactionRecordsList = []

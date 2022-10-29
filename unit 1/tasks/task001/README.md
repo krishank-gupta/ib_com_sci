@@ -25,7 +25,7 @@ https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17
 
 ### Code (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17b4f509e3eb/unit%201/tasks/task001/subtask2.py#L1:L18
+https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17b4f509e3eb/unit%201/tasks/task001/subtask2.py#L1-L18
 
 ### Results
 ![subtask2-results](./subtask2-results.png)
@@ -43,7 +43,7 @@ https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17
 
 ### Code (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17b4f509e3eb/unit%201/tasks/task001/subtask4.py#L1-18
+https://github.com/krishank-gupta/ib_com_sci/blob/78732f9961003d32f2a08057664f17b4f509e3eb/unit%201/tasks/task001/subtask4.py#L1-L18
 
 ### Results
 ![subtask4-results](./subtask4-results.png)

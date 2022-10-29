@@ -7,10 +7,11 @@ Since we were not allowed to use the replace method, I created a dictionary with
 
 AB + not(B+C) + B(notC notA)
 
-![quiz019-results](./quiz019-results.png)
-
+![quiz019-boolean-circuit](./quiz019-boolean-circuit.png)
 
 # Code: (remember to scroll)
+
+https://github.com/krishank-gupta/ib_com_sci/blob/6a1c9e2ca978136652bd46294c8855f7593148d6/unit%202/quizzes/quiz019/quiz019-code.py#L1-L23
 
 # Results
 

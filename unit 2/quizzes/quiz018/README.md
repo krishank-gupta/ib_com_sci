@@ -12,6 +12,9 @@ what is the minimum number of matchsticks Lily needs to burn to cross the forest
 [HL] Create the Truth table for the boolean equation out=ABC+(A+B+C)+not(notA notB notC)
 
 # Truth Table
+
+out = ABC + (A+B+C) + not(notA notB notC)
+
 | A | B | C | Output |
 |---|---|---|--------|
 | 1 | 1 | 1 |    1   |

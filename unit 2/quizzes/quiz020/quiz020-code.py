@@ -6,7 +6,6 @@ def get_truth():
     c = 1
 
     for i in range(0, 8, 1):         
-     
         if i % 4 == 0:
             a = not a
             
@@ -14,7 +13,7 @@ def get_truth():
             b = not b
         
         c = i%2
-     
+    
         print(f"| {int(a)} | {int(b)} | {int(c)} |")
 
 get_truth()

@@ -1,5 +1,5 @@
 def get_truth():
-    print("| A | B | C | AB + not B + not B * C |")
+    print(f"| A | B | C | {'AB + notB + notB C'.center(20)} |")
 
     a = 1
     b = 1
@@ -15,6 +15,8 @@ def get_truth():
         
         c = i%2
 
-        print(f"| {int(a)} | {int(b)} | {int(c)} | {(a&b) | (not b) |  (not b&c)} |")
+        operator = (a and b) or (not b) or ((not b) and c)
+
+        print(f"| {int(a)} | {int(b)} | {int(c)} | {str(int(operator)).center(20)} |")
 
 get_truth()

@@ -1,9 +1,7 @@
 from matplotlib import pyplot as plt
-
-plt.style.use('ggplot')
-
 import random 
 
+plt.style.use('ggplot')
 random.seed(1234)
 
 def produce(n,m,s):

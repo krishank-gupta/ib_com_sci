@@ -2,6 +2,14 @@
 
 This quiz stumped me for a while. Then I figured out the patterns and how to get them. Using the mod function to get the 2^0 position and then using that to create the 2^1 position was fascinating.
 
+# Code: (remember to scroll)
+
+https://github.com/krishank-gupta/ib_com_sci/blob/49de1fbcdb4bcba6ceed65769e021744e8f8d2de/unit%202/quizzes/quiz020/quiz020-code.py#L1-L20
+
+# Results
+
+![quiz020-results](./quiz020-results.png)
+
 # Truth table and circuit for: Light = S1S2+(S2+S3(notS1))S1 
 
 ### Truth Table
@@ -20,10 +28,3 @@ This quiz stumped me for a while. Then I figured out the patterns and how to get
 ### Circuit
 ![quiz020-circuit](./quiz020-circuit.jpg)
 
-# Code: (remember to scroll)
-
-https://github.com/krishank-gupta/ib_com_sci/blob/49de1fbcdb4bcba6ceed65769e021744e8f8d2de/unit%202/quizzes/quiz020/quiz020-code.py#L1-L20
-
-# Results
-
-![quiz020-results](./quiz020-results.png)

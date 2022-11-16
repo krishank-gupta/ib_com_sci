@@ -4,6 +4,7 @@ This quiz was similar to the last one but with the equation changed. I struggled
 
 # Code: (remember to scroll)
 
+https://github.com/krishank-gupta/ib_com_sci/blob/f0a6c3bc9406884d6eb3ed5eec45592be7eb031c/unit%202/quizzes/quiz024/quiz024-code.py#L1-L14
 
 # Results
 

@@ -2,10 +2,10 @@
 
 This quiz was super simple. I tried using trim() instead of replace() because I forgot that trim() doesn't remove empty space in between words. 
 
-Link to the code: (remember to scroll)
+# Code: (remember to scroll)
 
 https://github.com/krishank-gupta/ib_com_sci/blob/5f0a031dd3441f3cb9ef74470fc46067343630e3/unit%202/quizzes/quiz017/quiz017-code.py#L1-L17
 
-Here are the results for the test cases.
+# Results
 
 ![quiz017-results](./quiz017-results.png)

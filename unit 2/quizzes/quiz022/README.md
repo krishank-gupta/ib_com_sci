@@ -4,8 +4,7 @@ I learnt about seed in this quiz. Seed initializes the start number of a random 
 
 # Code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/834ecd975f425d24ae39daaa66d39203255c8cbf/unit%202/quizzes/quiz022/quiz022-code.py#L1-L17
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz022/quiz022-code.py#L1-L22
 # Results
 
 ![quiz022-results](./quiz022-results.png)

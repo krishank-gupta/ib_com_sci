@@ -13,8 +13,7 @@ what is the minimum number of matchsticks Lily needs to burn to cross the forest
 
 # Link to the code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/ed2099ec22566dba716b3e9c85e1a622a76d39fd/unit%202/quizzes/quiz018/quiz018-code.py#L1-L21
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz018/quiz018-code.py#L1-L19
 # Results
  
 ![quiz018-results](./quiz018-results.png)

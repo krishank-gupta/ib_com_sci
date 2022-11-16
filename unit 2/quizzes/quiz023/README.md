@@ -4,8 +4,7 @@ In this quiz, we had to graph the results of Quiz 22. I did this using the matpl
 
 # Code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/7b2efcadb2df5c44a9426b8887233715a09aaf88/unit%202/quizzes/quiz023/quiz023-code.py#L1-L35
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz023/quiz023-code.py#L1-L45
 # Results
 
 ![quiz023-results](./quiz023-results.png)

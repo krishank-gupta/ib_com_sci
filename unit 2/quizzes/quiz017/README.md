@@ -4,7 +4,7 @@ This quiz was super simple. I tried using trim() instead of replace() because I 
 
 # Code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/5f0a031dd3441f3cb9ef74470fc46067343630e3/unit%202/quizzes/quiz017/quiz017-code.py#L1-L17
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz017/quiz017-code.py#L1-L28
 
 # Results
 

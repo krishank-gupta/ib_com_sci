@@ -4,8 +4,7 @@ In this quiz, we had to graph the function of y = abs(x) in the interval -10 < x
 
 # Code: (remember to scroll)
 
-hhttps://github.com/krishank-gupta/ib_com_sci/blob/b5101bd4f882f9e957dee12194cdded0871e3030/unit%202/quizzes/quiz025/quiz025-code.py#L1-L13
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz025/quiz025-code.py#L1-L20
 # Results
 
 ![quiz025-results](./quiz025-results.png)

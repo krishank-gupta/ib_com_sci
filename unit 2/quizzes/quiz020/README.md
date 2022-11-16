@@ -4,8 +4,7 @@ This quiz stumped me for a while. Then I figured out the patterns and how to get
 
 # Code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/49de1fbcdb4bcba6ceed65769e021744e8f8d2de/unit%202/quizzes/quiz020/quiz020-code.py#L1-L20
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz020/quiz020-code.py#L1-L29
 # Results
 
 ![quiz020-results](./quiz020-results.png)

@@ -4,8 +4,7 @@ Since we were not allowed to use the replace method, I created a dictionary with
 
 # Code: (remember to scroll)
 
-https://github.com/krishank-gupta/ib_com_sci/blob/6a1c9e2ca978136652bd46294c8855f7593148d6/unit%202/quizzes/quiz019/quiz019-code.py#L1-L23
-
+https://github.com/krishank-gupta/ib_com_sci/blob/97b000adbca4756a294bb20c49120ae43b00b0ea/unit%202/quizzes/quiz019/quiz019-code.py#L1-L36
 # Results
 
 ![quiz019-results](./quiz019-results.png)

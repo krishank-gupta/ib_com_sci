@@ -123,4 +123,3 @@ plt.xlabel("Samples")
 plt.ylabel("Hourly Humidity")
 
 plt.show()
-

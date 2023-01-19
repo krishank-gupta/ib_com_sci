@@ -11,11 +11,7 @@ def test_Student():
     assert student.get_name() == 'John Doe2'
     assert student.get_grade() == '78%'
 
-def exceptions():
+def test_exceptions():
     with pytest.raises(TypeError):
-        student = Student(name=24, age=16, grade='78%')
-        student = Student(name='John Doe3', age="16", grade='78%')
-    with pytest.raises(ValueError):
-        student = Student(name='John Doe4', age=16, grade='78.02%')
-
-    
+        student = Student(name=24, age=16, grade='78')
+        student = Student(name='John Doe3', age="16", grade='78')

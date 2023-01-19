@@ -52,6 +52,8 @@ class Country:
     def remove_city(self, city_to_remove:City):
         self.city_list = [value for value in self.students if value != city_to_remove]
 
+    def get_cities(self):
+        return self.city_list
 
 Japan = Country(name="Japan")
 
@@ -63,4 +65,5 @@ for i in range(0,10,1):
 
     Japan.add_city(city_to_add=new_city)
 
-print(Japan)
+
+

@@ -1,5 +1,5 @@
 import pytest
-from quiz036 import Person, Student, Classroom
+from quiz036 import Person, Student
 
 def test_Person():
     person = Person(name="John Doe", age=16)

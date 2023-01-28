@@ -29,12 +29,6 @@ class City:
             distance = (((other_city.location.x - self.location.x) ** 2) + ((other_city.location.y - self.location.y) ** 2)) ** 0.5
             return distance
 
-point = Coordinate(1,1)
-point2 = Coordinate(2,2)
-pkhra = City("Pokhara", point2)
-ktm = City("Kathmandu", point)
-print(ktm.get_distance(pkhra))
-
 class Country:
     def __init__(self, name) -> None:
         self.city_list = []
@@ -60,10 +54,22 @@ Japan = Country(name="Japan")
 for i in range(0,10,1):
     city_names = ["Tokyo", "Okinawa", "Karuizawa", "Nagano", "Osaka", "Hiroshima", "Nagasaki", "Kyoto", "Sendai", "Chiba"]
 
-    new_coordinate = Coordinate( random.randint(0,10), random.randint(0,10) )
+    new_coordinate = Coordinate( random.randint(0,100), random.randint(0,100) )
     new_city = City(city_names[i], new_coordinate)
 
     Japan.add_city(city_to_add=new_city)
 
+# print(Japan)
 
+for item in Japan.city_list:
+    min = 100
+    closestCity = []
+    for another_item in Japan.city_list:
+        if item != another_item:
+            if (item.get_distance(another_item) < min):
+                min = item.get_distance(another_item)
+                closestCity = another_item
+    
+    print(f"{item}. Closest City: {closestCity}. Distance: {int(min)}")
 
+    

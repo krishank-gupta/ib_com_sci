@@ -1,0 +1,48 @@
+Screen:
+    size: 800,800
+    
+    MDLabel:
+        text: "Currency Converter"
+        font_style: "H3"
+        pos_hint: {'center_y': .75}
+        halign: "center"
+
+    MDTextField:
+        id: user_input
+        hint_text: "Enter an amount in NPR"
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        halign: "center"
+        size_hint_x: .75
+        mode: 'rectangle'
+        line_color_focus: "green"
+        hint_text_color_focus: "green"
+        text_color_focus: "green"
+        line_color_normal: "#003049"
+        hint_text_color_normal: "#003049"
+
+    
+    MDLabel:
+        text: "Click to convert"
+        pos_hint: {"center_x": .625, 'center_y':.4}
+        font_style: "H6"
+
+    MDChip:
+        text: "USD"
+        pos_hint: {"center_x": .725, "center_y": .4}
+        md_bg_color: "#003049"
+        text_color: "#FFFFFF"
+        on_press: app.converter_usd()
+
+    MDChip:
+        text: "JPY"
+        pos_hint: {"center_x": .825, "center_y": .4}
+        md_bg_color: "#D62828"
+        text_color: "#FFFFFF"
+        on_press: app.converter_jpy()
+
+    MDLabel:
+        id: output
+        text: ""
+        font_style: "H6"
+        pos_hint: {'center_y': .2}
+        halign: "center"

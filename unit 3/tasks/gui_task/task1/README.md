@@ -14,10 +14,10 @@ https://github.com/krishank-gupta/ib_com_sci/blob/a8521fb4da3d7f0572245f6a1b8fac
 
 # Results
 
-USD:
+### USD:
 ![task1usd](./usd.png)
 
-JPY:
+### JPY
 ![task1jpy](./jpy.png)
 
  

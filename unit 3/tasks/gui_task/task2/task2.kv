@@ -1,0 +1,60 @@
+Screen:
+    size: 1000,1200
+    
+    MDLabel:
+        text: "Bits Converter"
+        font_style: "H3"
+        pos_hint: {'center_y': .9}
+        halign: "center"
+
+    MDTextField:
+        id: user_input
+        hint_text: "Enter amount of Bits"
+        pos_hint: {'center_x': .5, 'center_y': .80}
+        halign: "center"
+        size_hint_x: .75
+        mode: 'rectangle'
+        line_color_focus: "green"
+        hint_text_color_focus: "green"
+        text_color_focus: "green"
+        line_color_normal: "#003049"
+        hint_text_color_normal: "#003049"
+        multiline: False  # single line
+        on_text_validate: app.test()
+
+    MDLabel:
+        id: center_msg
+        text: ""
+        font_style: "H5"
+        pos_hint: {'center_y': .70}
+        halign: "center"
+
+    MDCircularLayout:
+        id: container
+        pos_hint: {"center_x": .5, "center_y": .35}
+        circular_radius: 200
+        degree_spacing: 60
+        row_spacing: "250dp"
+        row_spacing: min(self.size) * 0.1
+    
+
+    # MDChip:
+    #     text: "USD"
+    #     pos_hint: {"center_x": .725, "center_y": .4}
+    #     md_bg_color: "#003049"
+    #     text_color: "#FFFFFF"
+    #     on_press: app.converter_usd()
+
+    # MDChip:
+    #     text: "JPY"
+    #     pos_hint: {"center_x": .825, "center_y": .4}
+    #     md_bg_color: "#D62828"
+    #     text_color: "#FFFFFF"
+    #     on_press: app.converter_jpy()
+
+    # MDLabel:
+    #     id: output
+    #     text: ""
+    #     font_style: "H6"
+    #     pos_hint: {'center_y': .2}
+    #     halign: "center"

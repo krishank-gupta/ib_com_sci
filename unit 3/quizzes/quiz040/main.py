@@ -9,22 +9,27 @@ class quiz040(MDApp):
         return
 
     def toggle(self):
-        print(self.dark)
+
         if self.dark == True:
             self.dark = False
         else:
             self.dark = True
-        print(self.dark)
         
         if self.dark:
-            self.root.ids.scre.md_bg_color = "#000000"
-            self.root.ids.text.color = "#ffffff"
+            # dark mode
+            self.root.ids.scre.md_bg_color = "#03001C"
+            self.root.ids.text.color = "#B6EADA"
             self.root.ids.btn.text = "Light Mode"
+            self.root.ids.btn.md_bg_color = "#B6EADA"
+            self.root.ids.btn.text_color = '#03001C'
 
         else:
-            self.root.ids.scre.md_bg_color = "#ffffff"
-            self.root.ids.text.color = "#000000"
+            # light mode
+            self.root.ids.scre.md_bg_color = "#B6EADA"
+            self.root.ids.text.color = "#03001C"
             self.root.ids.btn.text = "Dark Mode"
+            self.root.ids.btn.md_bg_color = "#301E67"
+            self.root.ids.btn.text_color = '#B6EADA'
 
 quiz040().run()
 

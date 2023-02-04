@@ -3,15 +3,20 @@ MDScreen:
 
     MDBoxLayout:
         id: scre
-        size: 1,1
+        orientation: 'vertical'
+        md_bg_color: '#B6EADA'
 
         MDLabel:
             id:text
+            color: "#03001C"
             font_style: "H3"
             text: 'Krish'
+            size_hint: 1,1
             halign: 'center'
 
         MDRaisedButton:
             id: btn
             text: "Dark Mode"
-            on_press: app.toggle()
+            md_bg_color: "#301E67"
+            text_color: '#B6EADA'
+            on_press: app.toggle() 

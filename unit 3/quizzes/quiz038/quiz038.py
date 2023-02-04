@@ -60,18 +60,6 @@ for i in range(0,10,1):
 
     Japan.add_city(city_to_add=new_city)
 
-# print(Japan)
-
-# for item in Japan.city_list:
-#     min = 100
-#     closestCity = []
-#     for another_item in Japan.city_list:
-#         if item != another_item:
-#             if (item.get_distance(another_item) < min):
-#                 min = item.get_distance(another_item)
-#                 closestCity = another_item
-    
-#     print(f"{item}. Closest City: {closestCity}. Distance: {int(min)}")
 
 print(Japan.city_list)
 
@@ -86,7 +74,6 @@ for city in Japan.city_list:
 plt.scatter(x_list, y_list)
 
 for i, txt in enumerate(names):
-    # plt.text(, (y_list[i], x_list[i]), fontsize="8")
     plt.text(x_list[i]+.05, y_list[i]+.05, txt, fontsize=9)
 
 

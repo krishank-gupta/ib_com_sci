@@ -1,0 +1,113 @@
+MDScreen:
+    size: 800,800
+    md_bg_color: '#F1FAEE'  
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint: .9,.9
+        pos_hint: {'center_x': .5,'center_y': .5}
+
+        MDBoxLayout:
+            size_hint: 1,.2
+            orientation: 'vertical'
+
+            MDLabel:
+                id:main_title
+                font_style: "H3"
+                text: 'Tic Tac Toe by Krish'
+                color: "#1D3557"
+                halign: 'center'
+
+
+            MDLabel:
+                id:turn_msg
+                font_style: "H5"
+                text: "Player X's Turn"
+                color: "#1D3557"
+                halign: 'center'
+
+        MDBoxLayout:
+            size_hint: 1,.7 
+            orientation: 'vertical'
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                
+                MDRaisedButton:
+                    id: btn1
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(1) 
+
+                MDRaisedButton:
+                    id: btn2
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(2)
+
+                MDRaisedButton:
+                    id: btn3
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(3)
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                
+                MDRaisedButton:
+                    id: btn4
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(4) 
+
+                MDRaisedButton:
+                    id: btn5
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(5)
+
+                MDRaisedButton:
+                    id: btn6
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(6)
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                
+                MDRaisedButton:
+                    id: btn7
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(7) 
+
+                MDRaisedButton:
+                    id: btn8
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(8)
+
+                MDRaisedButton:
+                    id: btn9
+                    text: ""
+                    size_hint: 1,1
+                    md_bg_color: "#A8DADC"
+                    on_press: app.play(9)
+
+        MDBoxLayout:
+            size_hint: 1,.1
+
+            MDRaisedButton:
+                id: reset_btn
+                text: "Reset"
+                size_hint: 1,1
+                md_bg_color: "#E63946"
+                on_press: app.reset()

@@ -1,0 +1,32 @@
+ScreenManager:
+    id:screenmanager
+    MysteryPageA:
+        name: "MysteryPageA"
+    MysteryPageB:
+        name: "MysteryPageB"
+
+<MysteryPageA>:
+    name: "MysteryPageA"
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            id: label1
+            text: "Welcome"
+            halign: "center"
+        MDRaisedButton:
+            text: "Click Me"
+            on_press: root.message1()
+            on_press: app.root.current = "MysteryPageB"
+
+<MysteryPageB>:
+    name: "MysteryPageB"
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: "This is mystery page B you pressed the button"
+            id: label2
+            halign: "center"
+        MDRaisedButton:
+            text: "Click Me"
+            on_press: root.message2()
+            on_press: app.root.current = "MysteryPageA"

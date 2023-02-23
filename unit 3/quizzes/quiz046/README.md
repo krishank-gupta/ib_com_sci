@@ -1,4 +1,4 @@
-# Quiz 44: 
+# Quiz 46: 
 
 In this quiz we had to connect sql and python
 

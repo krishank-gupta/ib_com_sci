@@ -4,7 +4,7 @@ In this quiz we had to solve some simple questions using sql and provided databa
 
 # Link to the SQL file: (remember to scroll)
 
-#L1-L15
+https://github.com/krishank-gupta/ib_com_sci/blob/716854007229602ee058bd672c24c535a5260dd0/unit%203/quizzes/quiz044/quiz044.session.sql#L1-L11
 
 # Results 
 

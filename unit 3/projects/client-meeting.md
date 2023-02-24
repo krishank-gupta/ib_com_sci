@@ -1,3 +1,8 @@
+<!-- Client meeting #2 -->
+add expiry date for products
+change color of product if expired
+23rd feb
+
 <!-- Client meeting #1 -->
 
 Tracker for fridge

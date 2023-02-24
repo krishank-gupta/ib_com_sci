@@ -1,13 +1,6 @@
 from passlib.context import CryptContext
 import sqlite3
 
-
-colors = {
-    'green': '\033[92m',
-    'red': '\033[91m',
-    'end': '\033[0m'
-}
-
 pwd_config = CryptContext(schemes=["pbkdf2_sha256"],
                           default="pbkdf2_sha256",
                           pbkdf2_sha256__default_rounds=30000
@@ -35,19 +28,15 @@ class database_handler:
 db = database_handler("bitcoin_exchange.db")
 
 db.run_query("select * from ledger")
-
 data = (db.cursor.fetchall())
 
-total_amount_ = 0
+total_amount_transactions = 0
 
 for i in data:
     hash = f"id {i[0]},sender_id {i[1]},receiver_id {i[2]},amount {i[3]}"
     if check_password(i[4], hash):
-        total_amount_ += i[3]
-        # print(f"{colors['green']} Tx(id={i[0]})Signature matches {colors['end']}")
-    # else:
-        # print(f"{colors['red']} Tx(id={i[0]})Error signature {colors['end']}")
+        total_amount_transactions += i[3]
 
 db.close()
 
-print(f"The total amount of transactions is: {total_amount_}")
+print(f"The total amount of transactions is: {total_amount_transactions}")

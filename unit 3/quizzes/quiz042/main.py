@@ -9,6 +9,9 @@ class MysteryPageB(MDScreen):
     def message2(self):
         self.ids.label2.text = "This is mystery page B you pressed the button"
 
+class MysteryPageC(MDScreen):
+    pass
+
 class main(MDApp):
     def build(self):
         return

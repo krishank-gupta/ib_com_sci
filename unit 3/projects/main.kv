@@ -1,0 +1,250 @@
+ScreenManager:
+    id:screenmanager
+    Dashboard:
+        name: "Dashboard"
+    Login:
+        name: "Login"
+    Register:
+        name: "Register"
+    ViewFridge:
+        name: "ViewFridge"
+    AddItems:
+        name: "AddItems"
+    ViewLog:
+        name: "ViewLog"
+
+<Login>:
+    name: "Login"
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .5}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        BoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Welcome to FreshTrack            Please login to continue'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: login_username
+                hint_text: 'Username'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text: 'Required'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+
+            MDTextField:
+                id: login_password
+                hint_text: 'Password'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text: 'Required'
+                helper_text_mode: 'on_error'
+                hint_text: "Password"
+                mode: "rectangle"
+                icon_right: "eye-off"
+                icon_right_color: app.theme_cls.primary_color
+                password: True
+
+            MDFillRoundFlatIconButton:
+                text: 'Login'
+                icon: 'login'
+                pos_hint: {"center_x": .5}
+                on_press: root.try_login()
+
+            MDRectangleFlatIconButton:
+                text: "Need an account? Register"
+                icon: "account"
+                line_color: 0, 0, 0, 0
+                size_hint: 0.5, None
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: app.root.current = "Register"
+
+<Register>:
+    name: "Register"
+
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .5}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        BoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Register'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: register_email
+                hint_text: 'Email'
+                helper_text: 'Please enter a valid email address'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "email"
+
+            MDTextField:
+                id: register_username
+                hint_text: 'Username'
+                helper_text: 'Please enter a username'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+
+            MDTextField:
+                id: register_password
+                hint_text: 'Password'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text: 'Required'
+                helper_text_mode: 'on_error'
+                hint_text: "Password"
+                mode: "rectangle"
+                icon_right: "eye-off"
+                icon_right_color: app.theme_cls.primary_color
+                password: True
+
+            MDTextField:
+                id: register_password_verify
+                hint_text: 'Reenter Password'
+                helper_text: "Please enter matching passwords"
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                hint_text: "Password Verify"
+                mode: "rectangle"
+                icon_right: "eye-off"
+                icon_right_color: app.theme_cls.primary_color
+                password: True
+
+            MDFillRoundFlatIconButton:
+                text: "Register"
+                icon: "account"
+                line_color: 0, 0, 0, 0
+                size_hint: 0.5, None
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: root.register()
+
+
+
+<Dashboard>
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .5}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        BoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Dashboard'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDFillRoundFlatIconButton:
+                text: 'View Fridge'
+                icon: 'eye'
+                pos_hint: {"center_x": .5}
+                on_press: app.root.current = "ViewFridge"
+
+            MDFillRoundFlatIconButton:
+                text: 'Add items'
+                icon: 'plus'
+                pos_hint: {"center_x": .5}
+                on_press: app.root.current = "AddItems"
+            
+            MDFillRoundFlatIconButton:
+                text: 'View Log'
+                icon: 'file-chart'
+                pos_hint: {"center_x": .5}
+                on_press: app.root.current = "ViewLog"
+
+<SwipeToDeleteItem>:
+    size_hint_y: None
+    id: swipe_to_delete_item  # add id here
+    height: content.height
+
+    MDCardSwipeLayerBox:
+        padding: "8dp"
+
+        MDIconButton:
+            icon: "trash-can"
+            pos_hint: {"center_y": .5}
+            on_release: app.remove_item(swipe_to_delete_item)  # pass the widget instance
+
+    MDCardSwipeFrontBox:
+
+        OneLineListItem:
+            id: content
+            text: root.text
+            _no_ripple_effect: True
+
+<ViewFridge>
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            elevation: 4
+            title: "MDCardSwipe"
+
+        MDScrollView:
+
+            MDList:
+                id: md_list
+                padding: 0
+                on_parent: root.populate_list()
+
+<AddItems>
+    MDLabel:
+        text: "Add item"
+<ViewLog>
+    MDLabel:
+        text: "Log"

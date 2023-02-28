@@ -4,6 +4,15 @@ ScreenManager:
         name: "MysteryPageA"
     MysteryPageB:
         name: "MysteryPageB"
+    MysteryPageC:
+        name: "MysteryPageC"
+
+<MysteryPageC>:
+    MDLabel:
+        text: "This is page C"
+    MDRaisedButton:
+        text: "go back"
+        on_press: app.root.current = "MysteryPageB"
 
 <MysteryPageA>:
     name: "MysteryPageA"
@@ -16,7 +25,7 @@ ScreenManager:
         MDRaisedButton:
             text: "Click Me"
             on_press: root.message1()
-            on_press: app.root.current = "MysteryPageB"
+            on_press: app.root.current = "MysteryPageC"
 
 <MysteryPageB>:
     name: "MysteryPageB"

@@ -47,8 +47,8 @@ $\qquad$ The application will be a dynamic application meaning that it will disp
 |       2      | Create problem defination | Have the client's problem defined |       25 min       |        9th Feb 2023        |       A       |
 |       3      | Create success criterias | Have the success criteria of the application that solved the client's problems |       1 hours       |        15th Feb 2023        |       A       |
 |       4      | Present success criteria to client | Have the success criteria of the application aprooved by the client |       10 minutes       |        28th Feb 2023        |       A       |
-|       5      | Write rationale | Have the tools used in the application explained and justified |       90 minutes       |        28th Feb 2023        |       A       |
-
+|       5      | Write rationale | Have the tools used in the application explained and justified |       30 minutes       |        28th Feb 2023        |       A       |
+|       n      | Work on Fridge Items Display system | Have the fridge screen display all items and make it deletable and editable  |       30 minutes       |        28th Feb 2023        |       X       |
 
 ## Test Plan
 

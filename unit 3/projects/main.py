@@ -2,6 +2,10 @@ from library import verification
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCardSwipe
+from kivymd.uix.datatables import MDDataTable
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDIconButton
+from kivy.metrics import dp
 from kivy.properties import StringProperty
 
 class main(MDApp):
@@ -12,9 +16,6 @@ class main(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Cyan"
         return 
-    
-    def remove_item(self, instance):
-        instance.ids.content.text = "Removed"  # Change text to "Removed"
         
 class Login(MDScreen):
     def try_login(self):
@@ -53,21 +54,33 @@ class Dashboard(MDScreen):
     pass
 
 class SwipeToDeleteItem(MDCardSwipe):
+    text = StringProperty()
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    text = StringProperty()
+    def remove_item(self, instance):
+        print(instance.ids.content.text)
+        instance.ids.content.text = "Removed"
 
+    def edit_item(self, instance):
+        print("edit screen", instance.ids.content.text)
+    
 class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def populate_list(self):
-        for i in range(20):
+ 
+        data = [1,2,3,4,5,6]
+        for i in data:
             self.ids.md_list.add_widget(
-                SwipeToDeleteItem(text=f"One-line item {i}")
+                SwipeToDeleteItem(text=str(i))
             )
-    
+
+
+    def goback(self):
+        self.parent.current = "Dashboard"
+
 
 class AddItems(MDScreen):
     pass

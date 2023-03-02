@@ -1,13 +1,15 @@
 ScreenManager:
     id:screenmanager
-    Dashboard:
-        name: "Dashboard"
+    
+    ViewFridge:
+        name: "ViewFridge"
     Login:
         name: "Login"
     Register:
         name: "Register"
-    ViewFridge:
-        name: "ViewFridge"
+    Dashboard:
+        name: "Dashboard"
+   
     AddItems:
         name: "AddItems"
     ViewLog:
@@ -24,7 +26,6 @@ ScreenManager:
         size_hint: None, None
         size: 450, 450
         pos_hint: {"center_x": .5, "center_y": .5}
-        # elevation: 5
         md_bg_color: 0/255, 0/255, 0/255,0.6
         
         BoxLayout:
@@ -218,7 +219,12 @@ ScreenManager:
         MDIconButton:
             icon: "trash-can"
             pos_hint: {"center_y": .5}
-            on_release: app.remove_item(swipe_to_delete_item)  # pass the widget instance
+            on_release: root.remove_item(swipe_to_delete_item)  # pass the widget instance
+
+        MDIconButton:
+            icon: "square-edit-outline"
+            pos_hint: {"center_y": .5}
+            on_release: root.edit_item(swipe_to_delete_item)  # pass the widget instance
 
     MDCardSwipeFrontBox:
 
@@ -227,20 +233,36 @@ ScreenManager:
             text: root.text
             _no_ripple_effect: True
 
-<ViewFridge>
-    MDBoxLayout:
-        orientation: "vertical"
+        OneLineListItem:
+            id: content
+            text: root.text
+            _no_ripple_effect: True
 
-        MDTopAppBar:
-            elevation: 4
-            title: "MDCardSwipe"
+
+<ViewFridge>
+    name: "ViewFridge"
+        
+
+    MDBoxLayout:
 
         MDScrollView:
-
             MDList:
                 id: md_list
                 padding: 0
                 on_parent: root.populate_list()
+
+        # Will always be at the bottom of the screen.
+    MDBoxLayout:
+        MDBottomAppBar:
+
+            TooltipMDIconButton:
+                md_bg_color: "red"
+            MDTopAppBar:
+                title: "View Fridge"
+                icon: "fridge-outline"
+                type: "bottom"
+                left_action_items: [["arrow-left", lambda x: root.goback(), "Dashboard", ""]]
+
 
 <AddItems>
     MDLabel:

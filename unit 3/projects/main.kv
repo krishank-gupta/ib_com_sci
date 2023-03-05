@@ -1,14 +1,13 @@
 ScreenManager:
     id:screenmanager
-    
-    ViewFridge:
-        name: "ViewFridge"  
+    Dashboard:
+        name: "Dashboard" 
     Login:
         name: "Login"
     Register:
-        name: "Register"
-    Dashboard:
-        name: "Dashboard"  
+        name: "Register" 
+    ViewFridge:
+        name: "ViewFridge"
     AddItems:
         name: "AddItems"
     ViewLog:
@@ -73,13 +72,14 @@ ScreenManager:
                 icon_right_color: app.theme_cls.primary_color
                 password: True
 
-            MDFillRoundFlatIconButton:
+            HoverButton:
                 text: 'Login'
                 icon: 'login'
+                size_hint: (0.4, 0.25)
                 pos_hint: {"center_x": .5}
                 on_press: root.try_login()
 
-            MDRectangleFlatIconButton:
+            RectangleHoverButton:
                 text: "Need an account? Register"
                 icon: "account"
                 line_color: 0, 0, 0, 0
@@ -164,16 +164,24 @@ ScreenManager:
                 icon_right_color: app.theme_cls.primary_color
                 password: True
 
-            MDFillRoundFlatIconButton:
+            HoverButton:
                 text: "Register"
                 icon: "account"
                 line_color: 0, 0, 0, 0
-                size_hint: 0.5, None
+                size_hint: (0.4, 0.25)
                 height: 40
                 pos_hint: {'center_x': 0.5, 'center_y': 0.4}
                 on_press: root.register()
 
+    CustomTopAppBar:
+        titletext: "Dashboard"
 
+<HoverButton>:
+    id: hello
+    pos_hint: {"center_x": .5}
+
+<RectangleHoverButton>:
+    id: rectangleHoverButton
 
 <Dashboard>
     id: dashboard
@@ -185,7 +193,7 @@ ScreenManager:
     MDCard:
         size_hint: None, None
         size: 450, 450
-        pos_hint: {"center_x": .5, "center_y": .5}
+        pos_hint: {"center_x": .5, "center_y": .55}
         # elevation: 5
         md_bg_color: 0/255, 0/255, 0/255,0.6
         
@@ -200,21 +208,23 @@ ScreenManager:
                 font_size: 40
                 halign: 'center'
 
-            MDFillRoundFlatIconButton:
+            HoverButton:
                 text: 'View Fridge'
                 icon: 'eye'
-                pos_hint: {"center_x": .5}
+                size_hint: (0.4, 0.25)
                 on_press: app.root.current = "ViewFridge"
 
-            MDFillRoundFlatIconButton:
+            HoverButton:
                 text: 'Add items'
                 icon: 'plus'
+                size_hint: (0.4, 0.25)
                 pos_hint: {"center_x": .5}
                 on_press: app.root.current = "AddItems"
             
-            MDFillRoundFlatIconButton:
+            HoverButton:
                 text: 'View Log'
                 icon: 'file-chart'
+                size_hint: (0.4, 0.25)
                 pos_hint: {"center_x": .5}
                 on_press: app.root.current = "ViewLog"
 
@@ -279,5 +289,26 @@ ScreenManager:
     MDLabel:
         text: "Add item"
 <ViewLog>
+
     MDLabel:
         text: "Log"
+
+
+<CustomSnackbar>
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+
+        opposite_colors: False
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: root.font_size
+        theme_text_color: 'Custom'
+        text_color: 'ffffff'
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}

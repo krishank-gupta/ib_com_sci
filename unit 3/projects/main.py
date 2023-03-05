@@ -2,13 +2,14 @@ from library import verification
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.card import MDCardSwipe
-from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.label import MDLabel
-from kivymd.uix.button import MDIconButton
+from kivymd.uix.button import MDFillRoundFlatIconButton, MDRectangleFlatIconButton
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.metrics import dp
-from kivy.properties import StringProperty
-from kivy.properties import ObjectProperty
+from kivymd.uix.snackbar import BaseSnackbar
+from kivy.core.window import Window
+from kivymd.uix.behaviors import HoverBehavior
+from kivymd.theming import ThemableBehavior
+from kivy.properties import StringProperty, NumericProperty
+
 
 class main(MDApp):
     def __init__(self, **kwargs):
@@ -28,6 +29,7 @@ class main(MDApp):
     def goback(self):
         self.root.current = "Dashboard"
         
+
 class Login(MDScreen):
     def try_login(self):
         username = self.ids.login_username.text
@@ -40,10 +42,19 @@ class Login(MDScreen):
             self.ids.login_password.error = True
 
         else: 
+            snackbar = CustomSnackbar(
+                text="Log in Sucessful!",
+                snackbar_x="10dp",
+                snackbar_y="10dp",
+                icon="information",
+                bg_color=(66/254, 186/254, 150/254, 1),
+            )
+            snackbar.size_hint_x = (
+                Window.width - (snackbar.snackbar_x * 2)
+            ) / Window.width
+            snackbar.open()
+        
             self.parent.current = 'Dashboard'
-        # else hash password
-
-        # store in db
 
 class Register(MDScreen):
     def register(self):
@@ -66,8 +77,35 @@ class Register(MDScreen):
 class Dashboard(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
 
+class ViewFridge(MDScreen):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def populate_list(self):
+        data = [1,2,3,4,5,6]
+        for i in data:
+            self.ids.md_list.add_widget(
+                SwipeToDeleteItem(text=str(i))
+            )
+
+class AddItems(MDScreen):
+    pass
+
+class ViewLog(MDScreen):
+    pass
+
+class CustomSnackbar(BaseSnackbar):
+    text = StringProperty(None)
+    icon = StringProperty(None)
+    font_size = NumericProperty("15sp")
+
+
+# Custom Footer Class
+class CustomTopAppBar(MDBoxLayout):
+    titletext = StringProperty("")    
+
+# Click to swipe Class
 class SwipeToDeleteItem(MDCardSwipe):
     text = StringProperty()
     def __init__(self, *args, **kwargs):
@@ -79,27 +117,25 @@ class SwipeToDeleteItem(MDCardSwipe):
 
     def edit_item(self, instance):
         print("edit screen", instance.ids.content.text)
-    
-class CustomTopAppBar(MDBoxLayout):
-    titletext = StringProperty("")
 
-class ViewFridge(MDScreen):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+# Custom Hover Button main
+class HoverButton(MDFillRoundFlatIconButton, ThemableBehavior, HoverBehavior):
+    def on_enter(self, *args):
+        self.md_bg_color = self.theme_cls.primary_dark
 
-    def populate_list(self):
- 
-        data = [1,2,3,4,5,6]
-        for i in data:
-            self.ids.md_list.add_widget(
-                SwipeToDeleteItem(text=str(i))
-            )
+    def on_leave(self, *args):
+        self.md_bg_color = self.theme_cls.primary_color
+
+# Custom Hover Button Flat
+class RectangleHoverButton(MDRectangleFlatIconButton, ThemableBehavior, HoverBehavior):
+    def on_enter(self, *args):
+        self.text_color = self.theme_cls.primary_dark
+        self.icon_color = self.theme_cls.primary_dark
+
+    def on_leave(self, *args):
+        self.text_color = self.theme_cls.primary_color
+        self.icon_color = self.theme_cls.primary_color
 
 
-class AddItems(MDScreen):
-    pass
-
-class ViewLog(MDScreen):
-    pass
 
 main().run()

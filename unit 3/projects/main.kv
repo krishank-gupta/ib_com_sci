@@ -2,18 +2,27 @@ ScreenManager:
     id:screenmanager
     
     ViewFridge:
-        name: "ViewFridge"
+        name: "ViewFridge"  
     Login:
         name: "Login"
     Register:
         name: "Register"
     Dashboard:
-        name: "Dashboard"
-   
+        name: "Dashboard"  
     AddItems:
         name: "AddItems"
     ViewLog:
         name: "ViewLog"
+
+<CustomTopAppBar>:
+    id: custom_footer
+    MDBottomAppBar:
+        MDTopAppBar:
+            icon: "fridge-outline"
+            type: "bottom"
+            title: root.titletext
+            left_action_items: [["arrow-left", lambda x: app.goback(), "Dashboard", ""]]
+            right_action_items: [["logout", lambda x: app.logout(), "Logout", ""]]
 
 <Login>:
     name: "Login"
@@ -167,6 +176,7 @@ ScreenManager:
 
 
 <Dashboard>
+    id: dashboard
     BoxLayout:
         orientation: 'vertical'
         FitImage:
@@ -208,6 +218,10 @@ ScreenManager:
                 pos_hint: {"center_x": .5}
                 on_press: app.root.current = "ViewLog"
 
+    CustomTopAppBar:
+        titletext: "Dashboard"
+   
+
 <SwipeToDeleteItem>:
     size_hint_y: None
     id: swipe_to_delete_item  # add id here
@@ -239,11 +253,13 @@ ScreenManager:
             _no_ripple_effect: True
 
 
-<ViewFridge>
-    name: "ViewFridge"
-        
 
+
+<ViewFridge>
+    name: "ViewFridge"        
+    
     MDBoxLayout:
+        id: fridge
 
         MDScrollView:
             MDList:
@@ -251,17 +267,12 @@ ScreenManager:
                 padding: 0
                 on_parent: root.populate_list()
 
-        # Will always be at the bottom of the screen.
-    MDBoxLayout:
-        MDBottomAppBar:
+    CustomTopAppBar:
+        titletext: "View Fridge"
 
-            TooltipMDIconButton:
-                md_bg_color: "red"
-            MDTopAppBar:
-                title: "View Fridge"
-                icon: "fridge-outline"
-                type: "bottom"
-                left_action_items: [["arrow-left", lambda x: root.goback(), "Dashboard", ""]]
+        # MDBottomAppBar:
+            # MDTopAppBar:
+                # title: "fridge"
 
 
 <AddItems>

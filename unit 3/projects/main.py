@@ -8,12 +8,13 @@ from kivymd.uix.snackbar import BaseSnackbar
 from kivy.core.window import Window
 from kivymd.uix.behaviors import HoverBehavior
 from kivymd.theming import ThemableBehavior
+from kivymd.uix.relativelayout import MDRelativeLayout
 from kivy.properties import StringProperty, NumericProperty
-
 
 class main(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
@@ -33,13 +34,14 @@ class main(MDApp):
 class Login(MDScreen):
     def try_login(self):
         username = self.ids.login_username.text
-        password = self.ids.login_password.text
+        password_field = self.ids.login_password
+        password = password_field.ids.text_field.text
 
         if not verification.str_input_verify(username):
             self.ids.login_username.error = True
 
         elif not verification.str_input_verify(password):
-            self.ids.login_password.error = True
+            password_field.ids.text_field.error = True
 
         else: 
             snackbar = CustomSnackbar(
@@ -136,6 +138,16 @@ class RectangleHoverButton(MDRectangleFlatIconButton, ThemableBehavior, HoverBeh
         self.text_color = self.theme_cls.primary_color
         self.icon_color = self.theme_cls.primary_color
 
+class ClickableTextFieldRound(MDRelativeLayout):
+    text = StringProperty()
+    hint_text = StringProperty()
 
+    def tryingg(self):
+        self.ids.eye_btns.theme_text_color = "Custom"
+        app = MDApp.get_running_app()
+        self.ids.eye_btns.text_color = app.theme_cls.primary_color
 
+    def unfocus(self):
+        self.ids.eye_btns.theme_text_color = "Custom"
+        self.ids.eye_btns.text_color = "#ffffff"
 main().run()

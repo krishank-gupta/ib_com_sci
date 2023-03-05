@@ -1,7 +1,8 @@
 ScreenManager:
     id:screenmanager
+ 
     Dashboard:
-        name: "Dashboard" 
+        name: "Dashboard"
     Login:
         name: "Login"
     Register:
@@ -12,16 +13,6 @@ ScreenManager:
         name: "AddItems"
     ViewLog:
         name: "ViewLog"
-
-<CustomTopAppBar>:
-    id: custom_footer
-    MDBottomAppBar:
-        MDTopAppBar:
-            icon: "fridge-outline"
-            type: "bottom"
-            title: root.titletext
-            left_action_items: [["arrow-left", lambda x: app.goback(), "Dashboard", ""]]
-            right_action_items: [["logout", lambda x: app.logout(), "Logout", ""]]
 
 <Login>:
     name: "Login"
@@ -57,20 +48,11 @@ ScreenManager:
                 helper_text_mode: 'on_error'
                 mode: "rectangle"
                 icon_right: "account"
-
-            MDTextField:
+            
+            ClickableTextFieldRound:
                 id: login_password
-                hint_text: 'Password'
-                icon_right_color_normal: '#ffffff'
-                hint_text_color_normal: '#ffffff'
-                line_color_normal: '#ffffff'
-                helper_text: 'Required'
-                helper_text_mode: 'on_error'
                 hint_text: "Password"
-                mode: "rectangle"
-                icon_right: "eye-off"
-                icon_right_color: app.theme_cls.primary_color
-                password: True
+                pos_hint: {"center_x": .5, "center_y": .5}
 
             HoverButton:
                 text: 'Login'
@@ -176,12 +158,6 @@ ScreenManager:
     CustomTopAppBar:
         titletext: "Dashboard"
 
-<HoverButton>:
-    id: hello
-    pos_hint: {"center_x": .5}
-
-<RectangleHoverButton>:
-    id: rectangleHoverButton
 
 <Dashboard>
     id: dashboard
@@ -230,8 +206,67 @@ ScreenManager:
 
     CustomTopAppBar:
         titletext: "Dashboard"
-   
+ 
 
+<ViewFridge>
+    name: "ViewFridge"        
+    
+    MDBoxLayout:
+        id: fridge
+
+        MDScrollView:
+            MDList:
+                id: md_list
+                padding: 0
+                on_parent: root.populate_list()
+
+    CustomTopAppBar:
+        titletext: "View Fridge"
+
+        # MDBottomAppBar:
+            # MDTopAppBar:
+                # title: "fridge"
+
+
+<AddItems>
+    MDLabel:
+        text: "Add item"
+
+<ViewLog>
+    MDLabel:
+        text: "Log"
+
+
+<CustomSnackbar>
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+
+        opposite_colors: False
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: root.font_size
+        theme_text_color: 'Custom'
+        text_color: 'ffffff'
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}
+
+  
+<CustomTopAppBar>:
+    id: custom_footer
+    MDBottomAppBar:
+        MDTopAppBar:
+            icon: "fridge-outline"
+            type: "bottom"
+            title: root.titletext
+            left_action_items: [["arrow-left", lambda x: app.goback(), "Dashboard", ""]]
+            right_action_items: [["logout", lambda x: app.logout(), "Logout", ""]]
+    
 <SwipeToDeleteItem>:
     size_hint_y: None
     id: swipe_to_delete_item  # add id here
@@ -262,53 +297,38 @@ ScreenManager:
             text: root.text
             _no_ripple_effect: True
 
+<HoverButton>:
+    id: hello
+    pos_hint: {"center_x": .5}
+
+<RectangleHoverButton>:
+    id: rectangleHoverButton
 
 
+<ClickableTextFieldRound>:
+    size_hint_y: None
+    height: text_field.height
 
-<ViewFridge>
-    name: "ViewFridge"        
-    
-    MDBoxLayout:
-        id: fridge
-
-        MDScrollView:
-            MDList:
-                id: md_list
-                padding: 0
-                on_parent: root.populate_list()
-
-    CustomTopAppBar:
-        titletext: "View Fridge"
-
-        # MDBottomAppBar:
-            # MDTopAppBar:
-                # title: "fridge"
-
-
-<AddItems>
-    MDLabel:
-        text: "Add item"
-<ViewLog>
-
-    MDLabel:
-        text: "Log"
-
-
-<CustomSnackbar>
-    MDIconButton:
-        pos_hint: {'center_y': .5}
-        icon: root.icon
-
-        opposite_colors: False
-
-    MDLabel:
-        id: text_bar
-        size_hint_y: None
-        height: self.texture_size[1]
+    MDTextField:
+        id: text_field
+        hint_text: root.hint_text
         text: root.text
-        font_size: root.font_size
-        theme_text_color: 'Custom'
-        text_color: 'ffffff'
-        shorten: True
-        shorten_from: 'right'
-        pos_hint: {'center_y': .5}
+        password: True
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        mode: "rectangle"
+        hint_text_color_normal: '#ffffff'
+        line_color_normal: '#ffffff'
+        on_focus:
+            root.tryingg() if self.focus else root.unfocus()
+
+    MDIconButton:
+        id:eye_btns
+        icon: "eye-off"
+        # icon_color: "#ffffff"
+        # icon_color: app.theme_cls.primary_color
+        pos_hint: {"center_y": .5}
+        pos: text_field.width - self.width + dp(6), 10
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            text_field.password = False if text_field.password is True else True

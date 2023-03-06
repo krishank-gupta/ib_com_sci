@@ -18,7 +18,9 @@ class main(MDApp):
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Teal"
+        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.primary_hue = "400"  # "500"
+
         return 
     
     def logout(self):
@@ -63,15 +65,19 @@ class Register(MDScreen):
 
         email = self.ids.register_email.text
         username = self.ids.register_username.text
-        first_pswd = self.ids.register_password.text
-        second_pswd = self.ids.register_password_verify.text
+        
+        password_field = self.ids.register_password
+        password_field_verify = self.ids.register_password_verify
+
+        first_pswd = password_field.ids.text_field.text
+        second_pswd = password_field_verify.ids.text_field.text
         
         if not verification.email_verify(email):
             self.ids.register_email.error = True
         elif not verification.str_input_verify(username):
             self.ids.register_username.error = True
         elif not verification.pswds_verify(first_pswd, second_pswd):
-            self.ids.register_password_verify.error = True
+            password_field_verify.ids.text_field.error = True
         else:
             print("registration success")
             self.parent.current = "Dashboard"
@@ -155,6 +161,7 @@ class RectangleHoverButton(MDRectangleFlatIconButton, ThemableBehavior, HoverBeh
 class ClickableTextFieldRound(MDRelativeLayout):
     text = StringProperty()
     hint_text = StringProperty()
+    helper_text = StringProperty()
 
     def tryingg(self):
         self.ids.eye_btns.theme_text_color = "Custom"

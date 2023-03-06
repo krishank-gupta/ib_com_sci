@@ -118,6 +118,8 @@ ScreenManager:
                 mode: "rectangle"
                 icon_right: "account"
 
+          
+
             MDTextField:
                 id: register_password
                 hint_text: 'Password'
@@ -173,40 +175,53 @@ ScreenManager:
         # elevation: 5
         md_bg_color: 0/255, 0/255, 0/255,0.6
         
-        BoxLayout:
+        MDBoxLayout:
             orientation: "vertical"
-            padding: "12dp"
-            spacing: "12dp"
 
-            MDLabel:
-                text: 'Dashboard'
-                font_style: 'H3'
-                font_size: 40
-                halign: 'center'
+            MDBoxLayout:
+                orientation: 'vertical'
+                pos_hint: {"center_x": .5, "center_y": .1}
+                size_hint: 1,.4
 
-            HoverButton:
-                text: 'View Fridge'
-                icon: 'eye'
-                size_hint: (0.4, 0.25)
-                on_press: app.root.current = "ViewFridge"
+                MDLabel:
+                    id: dashboard_title
+                    text: 'Dashboard'
+                    font_style: 'H3'
+                    font_size: 40
+                    halign: 'center'
 
-            HoverButton:
-                text: 'Add items'
-                icon: 'plus'
-                size_hint: (0.4, 0.25)
-                pos_hint: {"center_x": .5}
-                on_press: app.root.current = "AddItems"
-            
-            HoverButton:
-                text: 'View Log'
-                icon: 'file-chart'
-                size_hint: (0.4, 0.25)
-                pos_hint: {"center_x": .5}
-                on_press: app.root.current = "ViewLog"
+            MDBoxLayout:
+                orientation: 'vertical'
+                pos_hint: {"center_x": .5, "center_y": .99}
+                padding: '12dp'
+                spacing: '10dp'
+                size_hint: 1,.6
+
+                HoverButton:
+                    text: 'View Fridge'
+                    icon: 'eye'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    on_press: app.root.current = "ViewFridge"
+
+                HoverButton:
+                    text: 'Add items'
+                    icon: 'plus'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .5}
+                    on_press: app.root.current = "AddItems"
+                
+                HoverButton:
+                    text: 'View Log'
+                    icon: 'file-chart'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .5}
+                    on_press: app.root.current = "ViewLog"
 
     CustomTopAppBar:
         titletext: "Dashboard"
- 
 
 <ViewFridge>
     name: "ViewFridge"        

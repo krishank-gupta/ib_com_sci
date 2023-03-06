@@ -24,11 +24,11 @@ class main(MDApp):
     def logout(self):
         self.root.current = "Login"
 
-    def try_dashboard(self):
-        print("try dashboard attempted")
-
     def goback(self):
-        self.root.current = "Dashboard"
+        if self.root.current == "Dashboard":
+            self.root.current = "Login"
+        else:
+            self.root.current = "Dashboard"
         
 
 class Login(MDScreen):
@@ -55,7 +55,7 @@ class Login(MDScreen):
                 Window.width - (snackbar.snackbar_x * 2)
             ) / Window.width
             snackbar.open()
-        
+
             self.parent.current = 'Dashboard'
 
 class Register(MDScreen):
@@ -79,6 +79,20 @@ class Register(MDScreen):
 class Dashboard(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    def on_enter(self, *args):
+        # return super().on_enter(*args)
+        snackbar = CustomSnackbar(
+                text="Warning!",
+                snackbar_x="10dp",
+                snackbar_y="10dp",
+                icon="information",
+                bg_color=(66/254, 186/254, 150/254, 1),
+            )
+        snackbar.size_hint_x = (
+            Window.width - (snackbar.snackbar_x * 2)
+        ) / Window.width
+        snackbar.open()
 
 class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
@@ -105,7 +119,7 @@ class CustomSnackbar(BaseSnackbar):
 
 # Custom Footer Class
 class CustomTopAppBar(MDBoxLayout):
-    titletext = StringProperty("")    
+    titletext = StringProperty("") 
 
 # Click to swipe Class
 class SwipeToDeleteItem(MDCardSwipe):

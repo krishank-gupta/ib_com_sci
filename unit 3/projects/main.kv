@@ -1,16 +1,17 @@
 ScreenManager:
     id:screenmanager
- 
-    Dashboard:
-        name: "Dashboard"
+
+    AddItems:
+        name: "AddItems"
     Login:
         name: "Login"
     Register:
         name: "Register" 
+    Dashboard:
+        name: "Dashboard"
     ViewFridge:
         name: "ViewFridge"
-    AddItems:
-        name: "AddItems"
+
     ViewLog:
         name: "ViewLog"
 
@@ -86,7 +87,7 @@ ScreenManager:
         # elevation: 5
         md_bg_color: 0/255, 0/255, 0/255,0.6
         
-        BoxLayout:
+        MDBoxLayout:
             orientation: "vertical"
             padding: "12dp"
             spacing: "12dp"
@@ -143,7 +144,7 @@ ScreenManager:
 
             RectangleHoverButton:
                 text: "Back to Login?"
-                icon: "account"
+                icon: "login"
                 line_color: 0, 0, 0, 0
                 size_hint: 0.5, None
                 height: 40
@@ -214,27 +215,114 @@ ScreenManager:
 
 <ViewFridge>
     name: "ViewFridge"        
-    
-    MDBoxLayout:
-        id: fridge
 
-        MDScrollView:
-            MDList:
-                id: md_list
-                padding: 0
-                on_parent: root.populate_list()
+    MDBoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 750, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            id: fridge
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDBoxLayout:
+                size_hint: 1,.3
+
+
+                MDLabel:
+                    text: 'View fridge'
+                    font_style: 'H3'
+                    font_size: 40
+                    halign: 'center'
+
+            MDBoxLayout:
+                size_hint: 1,.7
+
+                MDScrollView:
+                    MDList:
+                        id: md_list
+                        padding: 0
+                        on_parent: root.populate_list()
 
     CustomTopAppBar:
         titletext: "View Fridge"
 
-        # MDBottomAppBar:
-            # MDTopAppBar:
-                # title: "fridge"
-
-
 <AddItems>
-    MDLabel:
-        text: "Add item"
+    id: AddItems
+
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 750, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Add Item'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: item_name
+                hint_text: 'Item Name'
+                helper_text: 'Please enter an Item Name'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+
+                # CHECKBOX
+                
+            MDTextField:
+                id: item_date
+                hint_text: 'Expiry'
+                helper_text: 'Please enter an expiry Name'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+                on_focus:
+                    # root.show_date_picker() if self.focus else root.close_dialog()
+                    root.show_date_picker()
+
+            HoverButton:
+                text: "Add"
+                icon: "plus"
+                line_color: 0, 0, 0, 0
+                size_hint: (0.4, 0.25)
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: root.register()
+        
+    CustomTopAppBar:
+        titletext: "Add Item"
+
 
 <ViewLog>
     MDLabel:

@@ -9,6 +9,7 @@ from kivy.core.window import Window
 from kivymd.uix.behaviors import HoverBehavior
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.relativelayout import MDRelativeLayout
+from kivymd.uix.pickers import MDDatePicker
 from kivy.properties import StringProperty, NumericProperty
 
 class main(MDApp):
@@ -18,8 +19,8 @@ class main(MDApp):
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Blue"
-        self.theme_cls.primary_hue = "400"  # "500"
+        self.theme_cls.primary_palette = "LightBlue"
+        self.theme_cls.primary_hue = "300"  # "500"
 
         return 
     
@@ -112,7 +113,25 @@ class ViewFridge(MDScreen):
             )
 
 class AddItems(MDScreen):
-    pass
+    def on_save(self, instance, value, date_range):
+        print(instance, value, date_range)
+        self.ids.item_date.text=str(value)
+        instance.dismiss(Force=True)
+
+    def show_date_picker(self):
+        date_dialog = MDDatePicker()
+        date_dialog.bind(
+            on_save=self.on_save, 
+            on_cancel=self.on_cancel)
+        date_dialog.open()
+        self.ids.item_date.focus = False
+        date_dialog.focus = True
+
+    def on_cancel(self, instance, value):
+        print("cancelled")
+        instance.dismiss()
+
+   
 
 class ViewLog(MDScreen):
     pass

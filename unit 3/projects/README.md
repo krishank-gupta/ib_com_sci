@@ -120,20 +120,20 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 The application uses an OOP paradigm. 
 
 1. Inheritance
-```
+```py
 class main(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 ```
 
-```
+```py
 class Login(MDScreen):
 ```
 The use of OOP Technique of Inheritance is demonstrated in the code snippets above. The main class inherits from it's parent class MDApp which comes from the KivyMD library. This means that the main class automatically inhabits the same properties and functionalities as it's parent class, in this case, the MDApp class. The Login class inherits from MDScreen which is another class from the KivyMD library. Inheritance helps us reuse code that can be reused among classes in the OOP paradigm.
 
 2. Attributes and Methods
 
-```
+```py
 class main(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -161,7 +161,7 @@ The above code shows the use of OOP Methods within classes. In the snippet, the 
 
 The application uses KivyMD as it's front-end. KivyMD helps us add beautiful components easily.
 
-```
+```kv
 <ViewFridge>
     name: "ViewFridge"        
 
@@ -204,9 +204,31 @@ The application uses KivyMD as it's front-end. KivyMD helps us add beautiful com
     CustomTopAppBar:
         titletext: "View Fridge"
 ```
-The above code snippet illustrates the use of KivyMD library in the application. The code is a snippet from the code for the View Fridge Screen that lets you view/edit/delete items in the fridge. 
+The above code snippet illustrates the use of KivyMD library in the application. The code is a snippet from the code for the View Fridge Screen that lets you view/edit/delete items in the fridge. The screen consists of a `MDBoxLayout` that contains a `FitImage` widget that sets a background image. After this, there is a `MDCard` which creates a beautiful card. The card consists of a `MDLabel` that has the text of "View Fridge" and a `MDScrollView` that presents data in the fridge in a scroll view. These content inside the card is organized by the use of `MDBoxLayouts`. At the bottom, there is a `CustomTopAppBar` which is a custom widget that is used as a footer for every screen. 
 
-<a name="orm"></a> Object Relational Mapping
+<a name="orm"></a> Object Relational Mapping using SQL Alchemy
+
+```py
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Integer, Column, String, Boolean, create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import select
+
+Base = declarative_base()
+
+# Database Tables Creation
+class users(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(250), unique=True, nullable=False)
+    username = Column(String(250), unique=True, nullable=False)
+    password = Column(String(300))
+    active = Column(Boolean(), default=False)
+
+    def __repr__(self) -> str:
+        return f"""id: {self.id},email: {self.email},username: {self.username},password: {self.password}, active: {self.active}"""
+```
+The above code shows the usage of Object Relational Mapping using SQL Alchemy. The first 4 lines are the imports necessary to import SQL Alchemy to get it working. 
 
 <a name="sqlite"></a> SQLite
 

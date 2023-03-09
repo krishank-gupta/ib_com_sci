@@ -80,7 +80,6 @@ class main(MDApp):
         self.root.current = "Login"
 
     def goback(self):
-        # self.root.current = "Login" if self.root.current == "Dashboard" else self.root.current = "Dashboard"
         if self.root.current == "Dashboard":
             self.root.current = "Login"
         else:
@@ -92,7 +91,7 @@ class Login(MDScreen):
         database_session.query(users).update({users.active: False})
         self.ids.login_username.text = ""
         self.ids.login_password.ids.text_field.text = ""
-        
+
     def try_login(self):
 
         # get user entered username and password

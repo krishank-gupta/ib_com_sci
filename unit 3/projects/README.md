@@ -4,10 +4,12 @@
 
 # Table of contents
 
-1. [Criteria A: Planning](#main1).
-2. [Criteria B: Solution Overview](#main2)
+1. [Criteria A: Planning](#planning)
+2. [Criteria B: Solution Overview](#solution)
+3. [Criteria C: Development](#development)
+4. [Criteria D: Functionality and Extensibility](#functionality)
 
-# <a name="main1"></a> Criteria A: Planning
+# <a name="planning"></a> Criteria A: Planning
 
 ## Problem definition
 
@@ -42,7 +44,7 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 **Fig.1.1** shows me and my client having a meeting to discuss the initial success criteria that I presented. The client gave some valuable feedback on the scucess criteria and how to make the application more suited to her needs.
 
 
-# <a name="main2"></a> Criteria B: Solution Overview
+# <a name="solution"></a> Criteria B: Solution Overview
 
 ## System Diagram
 <!-- ![](sysdim_sl.png) -->
@@ -92,31 +94,126 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 |       n      | Work on Fridge Items Display system | Have the fridge screen display all items and make it deletable and editable  |       30 minutes       |        28th Feb 2023        |       X       |
 
 
-# Criteria C: Development
+# <a name="development"></a> Criteria C: Development
 
 ## List of techniques used
 
-1. [Object Oriented Programming](#oop).
+1. [Object Oriented Programming](#oop)
     1. Inheritance
-    2. Encapsulation
-    3. Attributes and Methods
-2. KivyMD Library
+    2. Attributes and Methods
+2. [KivyMD Library](#kivymd)
     1. Components
     2. Theming
-3. Object Relational Mapping using SQL Alchemy
+3. [Object Relational Mapping using SQL Alchemy](#orm)
     1. Creating tables
     2. Adding data to tables
     3. Retrieving data from tables
-4. SQLite
-5. Coding principles
+4. [SQLite](#sqlite)
+5. [Coding principles](#principles)
     1. Don't Repeat Yourself (DRY) principle
     2. Keep It Simlpe, Stupid (KISS) principle
 
 ## Development
 
-<a name="oop"></a> OOP is used a lot in this application.
+<a name="oop"></a> Object Oriented Programming (OOP).
 
-# Criteria D: Functionality and Extensibility
+The application uses an OOP paradigm. 
+
+1. Inheritance
+```
+class main(MDApp):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+```
+
+```
+class Login(MDScreen):
+```
+The use of OOP Technique of Inheritance is demonstrated in the code snippets above. The main class inherits from it's parent class MDApp which comes from the KivyMD library. This means that the main class automatically inhabits the same properties and functionalities as it's parent class, in this case, the MDApp class. The Login class inherits from MDScreen which is another class from the KivyMD library. Inheritance helps us reuse code that can be reused among classes in the OOP paradigm.
+
+2. Attributes and Methods
+
+```
+class main(MDApp):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def build(self):
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "LightBlue"
+        self.theme_cls.primary_hue = "300"
+        return 
+    
+    def logout(self):
+        database_session.query(users).update({users.active: False})
+        self.root.current = "Login"
+
+    def goback(self):
+        if self.root.current == "Dashboard":
+            self.root.current = "Login"
+        else:
+            self.root.current = "Dashboard"
+```
+
+The above code shows the use of OOP Methods within classes. In the snippet, the main class has 4 methods: __init__, build, logout, and goback. The __init__ and build method are KivyMD methods that let you initialize the class and run the application. Logout and goback methods are created to run a certain block of code. These methods are called from the Kivy file when a certain event is fired. For example, when a user clicks on the logout button anywhere in the application, the logout method is run.
+
+<a name="kivymd"></a>  KivyMD
+
+The application uses KivyMD as it's front-end. KivyMD helps us add beautiful components easily.
+
+```
+<ViewFridge>
+    name: "ViewFridge"        
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 750, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            id: fridge
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDBoxLayout:
+                size_hint: 1,.3
+
+
+                MDLabel:
+                    text: 'View fridge'
+                    font_style: 'H3'
+                    font_size: 40
+                    halign: 'center'
+
+            MDBoxLayout:
+                size_hint: 1,.7
+
+                MDScrollView:
+                    MDList:
+                        id: md_list
+                        padding: 0
+                        on_parent: root.populate_list()
+
+    CustomTopAppBar:
+        titletext: "View Fridge"
+```
+The above code snippet illustrates the use of KivyMD library in the application. The code is a snippet from the code for the View Fridge Screen that lets you view/edit/delete items in the fridge. 
+
+<a name="orm"></a> Object Relational Mapping
+
+<a name="sqlite"></a> SQLite
+
+<a name="principles"></a> Coding Principles
+
+
+# <a name="functionality"></a> Criteria D: Functionality and Extensibility
 
 A 7 min video demonstrating the proposed solution with narration
 

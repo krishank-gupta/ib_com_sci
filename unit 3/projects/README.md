@@ -109,7 +109,7 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 
 ## Development
 
-<a name="oop"></a>
+<a name="oop"></a> OOP is used a lot in this application.
 
 # Criteria D: Functionality and Extensibility
 

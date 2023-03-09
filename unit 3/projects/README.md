@@ -2,7 +2,12 @@
 
 # Unit 3: Fridge Tracker Software
 
-# Criteria A: Planning
+# Table of contents
+
+1. [Criteria A: Planning](#main1).
+2. [Criteria B: Solution Overview](#main2)
+
+# <a name="main1"></a> Criteria A: Planning
 
 ## Problem definition
 
@@ -37,7 +42,7 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 **Fig.1.1** shows me and my client having a meeting to discuss the initial success criteria that I presented. The client gave some valuable feedback on the scucess criteria and how to make the application more suited to her needs.
 
 
-# Criteria B: Solution Overview
+# <a name="main2"></a> Criteria B: Solution Overview
 
 ## System Diagram
 <!-- ![](sysdim_sl.png) -->

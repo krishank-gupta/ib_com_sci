@@ -1,44 +1,115 @@
-from library import verification
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
+from kivy.core.window import Window
+from kivy.properties import StringProperty, NumericProperty
 from kivymd.uix.card import MDCardSwipe
 from kivymd.uix.button import MDFillRoundFlatIconButton, MDRectangleFlatIconButton
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.snackbar import BaseSnackbar
-from kivy.core.window import Window
+from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.behaviors import HoverBehavior
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.relativelayout import MDRelativeLayout
-from kivymd.uix.pickers import MDDatePicker
-from kivy.properties import StringProperty, NumericProperty
+
+# Library Imports
+from library import verification, general
+
+# DB Imports
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Integer, Column, String, Boolean, create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import select
+
+Base = declarative_base()
+
+# Database Tables Creation
+class users(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    email = Column(String(250), unique=True, nullable=False)
+    username = Column(String(250), unique=True, nullable=False)
+    password = Column(String(300))
+    active = Column(Boolean(), default=False)
+
+    def __repr__(self) -> str:
+        return f"""id: {self.id},email: {self.email},username: {self.username},password: {self.password}, active: {self.active}"""
+
+class items(Base):
+    __tablename__ = "items"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    category = Column(String(250), unique=True, nullable=False)
+    expiry = Column(String(300), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    owner = Column(String(300), nullable=False)
+
+class logs(Base):
+    __tablename__ = "logs"
+    id = Column(Integer, primary_key=True)
+    action = Column(String(250), nullable=False)
+
+engine = create_engine('sqlite:///main.db')
+
+Base.metadata.create_all(engine)
+Base.metadata.bind = engine
+
+session = sessionmaker(bind=engine)
+database_session = session()
+
+# make sure all users active state is false:
+database_session.query(users).update({users.active: False})
+
+# Simple Select all users query using SQL Alchemy
+query = select(users)
+res = database_session.execute(query).fetchall()
+print(res)
+
 
 class main(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-
     def build(self):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "LightBlue"
-        self.theme_cls.primary_hue = "300"  # "500"
-
+        self.theme_cls.primary_hue = "300"
         return 
     
     def logout(self):
+        database_session.query(users).update({users.active: False})
         self.root.current = "Login"
 
     def goback(self):
+        # self.root.current = "Login" if self.root.current == "Dashboard" else self.root.current = "Dashboard"
         if self.root.current == "Dashboard":
             self.root.current = "Login"
         else:
             self.root.current = "Dashboard"
-        
 
 class Login(MDScreen):
+    def on_pre_enter(self, *args):
+        # return super().on_pre_enter(*args)
+        database_session.query(users).update({users.active: False})
+        self.ids.login_username.text = ""
+        self.ids.login_password.ids.text_field.text = ""
+        
     def try_login(self):
+
+        # get user entered username and password
         username = self.ids.login_username.text
         password_field = self.ids.login_password
         password = password_field.ids.text_field.text
+        
+        print("current username", username)
+        
+        query = database_session.query(users).filter(users.username == username)
+        registered_users = database_session.execute(query).fetchall()
+        
+        print("reg users:", registered_users)
+
+        db_pswd_query = database_session.query(users.password).filter(users.username == username)
+        db_pswd = database_session.execute(db_pswd_query).fetchone()
+        db_pswd = general.str_clean(db_pswd)
 
         if not verification.str_input_verify(username):
             self.ids.login_username.error = True
@@ -46,7 +117,18 @@ class Login(MDScreen):
         elif not verification.str_input_verify(password):
             password_field.ids.text_field.error = True
 
+        elif not registered_users:
+            password_field.ids.text_field.error = True
+            password_field.helper_text = "user not registered"
+            print("not registered")
+
+        elif not db_pswd == password:
+            password_field.ids.text_field.error = True
+            password_field.helper_text = "incorrect password"
+
         else: 
+            database_session.query(users).filter(users.username == username).update({users.active: True})
+
             snackbar = CustomSnackbar(
                 text="Log in Sucessful!",
                 snackbar_x="10dp",
@@ -54,6 +136,7 @@ class Login(MDScreen):
                 icon="information",
                 bg_color=(66/254, 186/254, 150/254, 1),
             )
+            
             snackbar.size_hint_x = (
                 Window.width - (snackbar.snackbar_x * 2)
             ) / Window.width
@@ -81,6 +164,13 @@ class Register(MDScreen):
             password_field_verify.ids.text_field.error = True
         else:
             print("registration success")
+            print(email, username, first_pswd, second_pswd)
+
+            temp_user = users(email=email, username=username, password=first_pswd, active=True)
+            
+            database_session.add(temp_user)
+            database_session.commit()
+
             self.parent.current = "Dashboard"
 
 class Dashboard(MDScreen):
@@ -88,18 +178,14 @@ class Dashboard(MDScreen):
         super().__init__(*args, **kwargs)
 
     def on_enter(self, *args):
-        # return super().on_enter(*args)
-        snackbar = CustomSnackbar(
-                text="Warning!",
-                snackbar_x="10dp",
-                snackbar_y="10dp",
-                icon="information",
-                bg_color=(66/254, 186/254, 150/254, 1),
-            )
-        snackbar.size_hint_x = (
-            Window.width - (snackbar.snackbar_x * 2)
-        ) / Window.width
-        snackbar.open()
+
+        query = select(users.username).where(users.active == True)
+        res = database_session.execute(query).fetchall()
+        name = (general.str_clean(res))
+
+        self.ids.dashboard_title.text = f"Welcome {name}"
+
+        print(database_session.execute(select(users).where(users.active == True)).fetchall())
 
 class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
@@ -131,16 +217,15 @@ class AddItems(MDScreen):
         print("cancelled")
         instance.dismiss()
 
-   
-
-class ViewLog(MDScreen):
-    pass
+    def checkbox_click(self, checkbox, value, category):
+        if value:  # if the check is true
+            self.selected_category = category
+            print(f"{category} is selected,checkbox:{checkbox},value:{value}")
 
 class CustomSnackbar(BaseSnackbar):
     text = StringProperty(None)
     icon = StringProperty(None)
     font_size = NumericProperty("15sp")
-
 
 # Custom Footer Class
 class CustomTopAppBar(MDBoxLayout):
@@ -190,4 +275,6 @@ class ClickableTextFieldRound(MDRelativeLayout):
     def unfocus(self):
         self.ids.eye_btns.theme_text_color = "Custom"
         self.ids.eye_btns.text_color = "#ffffff"
+
+
 main().run()

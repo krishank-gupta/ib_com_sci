@@ -1,6 +1,5 @@
 ScreenManager:
     id:screenmanager
-
     AddItems:
         name: "AddItems"
     Login:
@@ -11,9 +10,6 @@ ScreenManager:
         name: "Dashboard"
     ViewFridge:
         name: "ViewFridge"
-
-    ViewLog:
-        name: "ViewLog"
 
 <Login>:
     name: "Login"
@@ -203,12 +199,12 @@ ScreenManager:
                     on_press: app.root.current = "AddItems"
                 
                 HoverButton:
-                    text: 'View Log'
-                    icon: 'file-chart'
+                    text: 'Log Out'
+                    icon: 'logout'
                     size_hint: .6,.2
                     font_size: "20dp"
                     pos_hint: {"center_x": .5}
-                    on_press: app.root.current = "ViewLog"
+                    on_press: app.root.current = "Login"
 
     CustomTopAppBar:
         titletext: "Dashboard"
@@ -293,10 +289,86 @@ ScreenManager:
                 icon_right: "account"
 
             MDBoxLayout:
-                orientation: 'horizontal'
+                orientation: "horizontal"
+                size_hint: 1,.2
 
-                # CHECKBOX
-                
+                MDBoxLayout:
+                    pos_hint: {"center_y":.5}
+                    orientation: "vertical"
+                    size_hint: 1,1
+                    MDLabel:
+                        font_size : 30
+                        font_name: "Arial"
+                        text: "Category"
+                        pos_hint: {"center_y":.5}
+                        halign:"center"
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: meat
+                        group: 'group1' #this group is so that all the checkboxes are linked and only one can be selected
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        active: True
+                        on_active: root.checkbox_click(self, self.active, "Meat")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Meat'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: dairy
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "dairy")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Dairy'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: fruits
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "fruits")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Fruits'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: veggies
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "veggies")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Veggies'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: drinks
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "Drinks")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Drinks'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
             MDTextField:
                 id: item_date
                 hint_text: 'Expiry'
@@ -322,11 +394,6 @@ ScreenManager:
         
     CustomTopAppBar:
         titletext: "Add Item"
-
-
-<ViewLog>
-    MDLabel:
-        text: "Log"
 
 
 <CustomSnackbar>

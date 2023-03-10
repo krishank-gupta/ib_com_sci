@@ -18,7 +18,7 @@ from library import verification, general
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Integer, Column, String, Boolean, create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import select
+from sqlalchemy import select, delete
 
 Base = declarative_base()
 
@@ -43,6 +43,9 @@ class items(Base):
     quantity = Column(Integer, nullable=False)
     owner = Column(String(300), nullable=False)
 
+    def __repr__(self) -> str:
+        return f"""{self.name}, {self.category}, {self.expiry}, {self.quantity}, {self.owner}, {self.id}"""
+
 engine = create_engine('sqlite:///main.db')
 
 Base.metadata.create_all(engine)
@@ -57,6 +60,7 @@ database_session.query(users).update({users.active: False})
 # Simple Select all users query using SQL Alchemy
 query = select(users)
 res = database_session.execute(query).fetchall()
+print(res)
 
 class main(MDApp):
     def __init__(self, **kwargs):
@@ -172,18 +176,20 @@ class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-
     def populate_list(self):
         print("hi")
-        query = select(items)
-        res = database_session.execute(query).fetchall()
-        fridge = (general.str_clean(res))
-        print(fridge)
-
-        data = [1,2,3,4,5,6,7]
+        query2 = select(items)
+        res2 = database_session.execute(query2).fetchall()
+        data = (str((res2)).split("), ("))
+        print(data)
+        data.insert(0,"name category expiry quantity owner id")
         for i in data:
+            main = ""
+            for x in i:
+                if x.isalnum() or x.isspace() or x=="-":
+                    main += x
             self.ids.md_list.add_widget(
-                SwipeToDeleteItem(text=str(i))
+                SwipeToDeleteItem(text=str(main))
             )
 
 class AddItems(MDScreen):
@@ -259,11 +265,14 @@ class SwipeToDeleteItem(MDCardSwipe):
         super().__init__(*args, **kwargs)
 
     def remove_item(self, instance):
-        print(instance.ids.content.text)
+        id = (instance.ids.content.text.split(" ")[-1])
+
+        query = delete(items).where(items.id == id)
+        database_session.execute(query)
+        database_session.commit()
+
         instance.ids.content.text = "Removed"
 
-    def edit_item(self, instance):
-        print("edit screen", instance.ids.content.text)
 
 # Custom Hover Button main
 class HoverButton(MDFillRoundFlatIconButton, ThemableBehavior, HoverBehavior):

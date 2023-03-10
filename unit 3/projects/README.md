@@ -31,12 +31,11 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 
 ## Success Criteria
 1. The application has a login system where users can login and register using username, email, and password 
-2. The application provides a screen to let logged in user view, edit, and delete items in the fridge
-3. The application gives notifications when an item is about to expire in the next 7 days and changes the color of such items on the table to red
-4. The application fridge view has filters that can let you categorize the items based on type of item: meat, sweets, drinks, fruits & veggies, dairy
-5. The application fridge view has filters that can let you categorize items based on owner
-6. The application gives notifications when an item's quantity is less than 10% of normal and changes the color of such items on the table to orange
-7. The application automatically adds the logged in user as owner when adding a new item to the fridge
+2. The application provides a screen to let logged in user view and delete items in the fridge.
+3. The application has an easy to use graphic user interface that can be used by the least tech-savy.
+4. The application is pretty and makes the users want to use it.
+5. The application validates all inputs and presents a clear message to the user when there is an error.
+6. The application automatically adds the logged in user as owner when adding a new item to the fridge.
 
 ## Meeting with client to discuss Success Criteria
 
@@ -58,9 +57,9 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 **Fig.2.2** shows the relationship between the different tables in the database along with each table's data attributes and their primary key.
 
 ## UML  Diagram
-![entity-relationship-diagram](./img/er-diagram.png)
+![uml-diagram](./img/uml-diagram.png)
 
-**Fig.2.3** shows the relationship between the different tables in the database along with each table's data attributes and their primary key.
+**Fig.2.3** shows the relationship between the different classes in the database along with each classes attributes and methods
 
 ## WireFrame Diagram
 ![wireframe-diagram](./img/wireframe.png)
@@ -68,25 +67,38 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 **Fig.2.4** shows the relationship between the different screens in kivymd.
 
 ## Flowcharts 
-![entity-relationship-diagram](./img/er-diagram.png)
+![flowchart](./img/flowchart-2.png)
 
-**Fig.2.4** shows the relationship between the different tables in the database along with each table's data attributes and their primary key.
+**Fig.2.5** explains how the code that processes a login request works
+
+![flowchart](./img/flowchart-1.png)
+**Fig.2.6** explains how the code that processes a goback request from the footer
 
 ## Data Storage
 ![data-storage-diagram](./img/data-storage.png)
 
-**Fig.2.x** is a representation of how data is stored in the databse i.e. in tables. The figure shows the representation of one table used in the application called users. The table contains unsafe passwords and dummy accounts as it is only a representation. The actual application uses SHA-256 Hashing to protect passwords. 
+**Fig.2.7** is a representation of how data is stored in the databse i.e. in tables. The figure shows the representation of one table used in the application called users. The table contains unsafe passwords and dummy accounts as it is only a representation. The actual application uses SHA-256 Hashing to protect passwords. 
 
 
 ## Test Plan
-| **Task No.** |  **Planned Action** |          **Planned Outcome**         | **Time Estimate** | **Target Completion Date** | **Criterion** |
-|:------------:|:-------------------:|:------------------------------------:|:-----------------:|:--------------------------:|:-------------:|
-|       1      | Meeting with client | Start collecting context for problem |       6 min       |        7th Feb 2023        |       A       |
-|       2      | Create problem defination | Have the client's problem defined |       25 min       |        9th Feb 2023        |       A       |
-|       3      | Create success criterias | Have the success criteria of the application that solved the client's problems |       1 hours       |        15th Feb 2023        |       A       |
-|       4      | Present success criteria to client | Have the success criteria of the application aprooved by the client |       10 minutes       |        28th Feb 2023        |       A       |
-|       5      | Write rationale | Have the tools used in the application explained and justified |       30 minutes       |        28th Feb 2023        |       A       |
-|       n      | Work on Fridge Items Display system | Have the fridge screen display all items and make it deletable and editable  |       30 minutes       |        28th Feb 2023        |       X       |
+
+The following testing plan outlines the many different test cases to be carried out to ensure the accuracy and reliability of the program. The testing is run in a python environment with KivyMD and SQL Alchemy dependencies. 
+
+|    **Test Cases**    |                             **Purpose**                             |                              **Inputs**                             |                                        **Outputs**                                        |
+|:--------------------:|:-------------------------------------------------------------------:|:-------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
+|     Login System     |         To ensure login credientials are verified correctly         |           Enter a valid username and an invalid password.           |              Verify that the error message "incorrect password" is displayed.             |
+|     Login System     |         To ensure login credientials are verified correctly         |          Enter an invalid username and an invalid password.         |             Verify that the error message "user not registered" is displayed.             |
+|     Login System     |         To ensure login credientials are verified correctly         |             Enter a valid username and a valid password.            |        Verify that the login is successful, and the dashboard screen is displayed.        |
+|  Registration System | To ensure registration creditials are verified and stored correctly | Enter a valid email, a valid username, and two different passwords. |       Verify that the registration is successful, and the login screen is displayed.      |
+|  Registration System | To ensure registration creditials are verified and stored correctly |                       Enter an invalid email.                       |      Verify that the error message "Please enter a valid email address" is displayed.     |
+|  Registration System | To ensure registration creditials are verified and stored correctly |                      Enter an invalid username.                     |        Verify that the error message "Please enter a valid username" is displayed.        |
+|  Registration System | To ensure registration creditials are verified and stored correctly |                    Enter two different passwords.                   |            Verify that the error message "Passwords do not match" is displayed.           |
+| Logout Functionality |          To ensure the logout system works in every screen          |              Click on the Logout button on each screen              |                         Verify that the login screen is displayed.                        |
+|       Add Item       |           To ensure added items are added to the database           |              Add a dummy item fromt the add item screen             | Verify that the added item is added to the database and viewable in the view items screen |
+|       Add Item       |           To ensure added items are added to the database           |                   Add an expiry date from the past                  |                         Verify that the application gives an error                        |
+|       Add Item       |           To ensure added items are added to the database           |                       Add a negative quantity                       |                         Verify that the application shows an error                        |
+|      View Items      |            To ensure all items are viewable and deletable           |                             View screen                             |                Ensure every item from the table is added in the view screen               |
+|      View Items      |            To ensure all items are viewable and deletable           |                            Delete an item                           |        Ensure the item is deleted from the database and a removed message is shown        |
 
 ## Record of Tasks
 
@@ -281,40 +293,41 @@ Code that needs to be reused throughout classes are kept in a library folder and
 
 <a name="git"></a> Git and Github
 
+Git is used as version control in the development of this application. After every major milestone, a git commit is made to keep track of the updates. If there are any problems in the code, the code can be reverted to a previous git commit. This insures that the application is unaffected by any bugs that may arise when the code is changed or when more additional code is added. Additionally, the code is uploaded to GitHub after every commit to insure that the code is in the cloud and any physical liabilities to the developer's laptop doesn't affect the development of the application. GitHub Command Line Interface is used to make this process efficient.
+
+## Computational Thinking
+
+1. Abstraction & Decomposition: The code uses many libraries, imports, classes, and functions to break down code in chunks and simplify the program's structure.
+
+2. Modularization: The code is broken into hunks with each chunk responsible for a particular task. This creates modularity, promotes reusability, and eases maintenance.
+
+3. Data Representation: The code represents data using different data types like Strings, Integers, and Booleans to capture and manipulate the data's state.
+
+4. Logical Reasoning: The code includes conditional statements and logical operators to make decisions based on certain conditions. This shows logical reasoning.
+
+
 # <a name="functionality"></a> Criteria D: Functionality and Extensibility
 
-A 7 min video demonstrating the proposed solution with narration
+A 4 min video demonstrating the proposed solution with narration
 
 # Citations
 
-1. 
+1. ChatGPT, (2023), with prompt "Create a custom top app bar that "
 
-<!-- OWNER ????????? -->
-<!-- Client meeting #2 -->
-<!-- add expiry date for products
-change color of product if expired
-23rd feb -->
+2. ChatGPT, (2023), with prompt "Delete data from table using SQL Alchemy"
 
-<!-- Client meeting #1 -->
+3. ChatGPT, (2023), with prompt "How to create global widgets in KivyMD"
 
-<!-- Tracker for fridge
-    add items in the frigeq
-    edit items in the fridge
-    delete items from the fridge
+4. Craiyon. (n.d.). AI-generated image. Retrieved from https://www.craiyon.com/ with prompt "Open Fridge in Van Gogh Style".
 
-Items should have quanity 
-Items type:
-    sweet
-    veggies
-    meat
-    drinks -->
+5. KivyMD. (n.d.). Date Picker. Retrieved from https://kivymd.readthedocs.io/en/1.1.1/components/datepicker/
 
-<!-- 
-record of task
+6. KivyMD. (n.d.). Tooltip. Retrieved from https://kivymd.readthedocs.io/en/1.1.1/components/tooltip/
 
-first planning. meeting with client
-start collecting context of the problm
-6 min 
-7 feb
-A
- -->
+7. Stack Overflow. (2022). Answer to "How to access variables in another class using method of a class". Retrieved from https://stackoverflow.com/a/70440431
+
+8. Stack Overflow. (2021). Answer to "KivyMD how to add multiple MDIconButton to a MDToolbar". Retrieved from https://stackoverflow.com/a/68514264.
+
+9. Stack Overflow. (2021). Answer to "Python kivy MD change toolbar color dynamically". Retrieved from https://stackoverflow.com/a/67291770
+
+10. Stack Overflow. (2020). Answer to "How to run a function when KivyMD tab is pressed". Retrieved from https://stackoverflow.com/a/64528598

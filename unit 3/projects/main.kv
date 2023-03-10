@@ -1,6 +1,8 @@
 ScreenManager:
     id:screenmanager
   
+    ViewFridge:
+        name: "ViewFridge"
     Login:
         name: "Login"
     Register:
@@ -9,8 +11,7 @@ ScreenManager:
         name: "Dashboard"
     AddItems:
         name: "AddItems"
-    ViewFridge:
-        name: "ViewFridge"
+    
 
 <Login>:
     name: "Login"
@@ -450,17 +451,7 @@ ScreenManager:
             pos_hint: {"center_y": .5}
             on_release: root.remove_item(swipe_to_delete_item)  # pass the widget instance
 
-        MDIconButton:
-            icon: "square-edit-outline"
-            pos_hint: {"center_y": .5}
-            on_release: root.edit_item(swipe_to_delete_item)  # pass the widget instance
-
     MDCardSwipeFrontBox:
-
-        OneLineListItem:
-            id: content
-            text: root.text
-            _no_ripple_effect: True
 
         OneLineListItem:
             id: content

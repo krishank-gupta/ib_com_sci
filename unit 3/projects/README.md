@@ -47,20 +47,25 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 # <a name="solution"></a> Criteria B: Solution Overview
 
 ## System Diagram
-<!-- ![](sysdim_sl.png) -->
+![system diagram](./img/system-diagram.png)
 
 **Fig.2.1** shows the system diagram of the application. It includes the inputs: keyboard and trackpad, the different systems that are used in the application like the programming languages and it's version, Integrated Development Environment (IDE), computer used with it's processor, memory, etc, and also includes the application output screen and the database.
 
 
-## Entity Relationship Diagrams
+## Entity Relationship Diagram
 ![entity-relationship-diagram](./img/er-diagram.png)
 
 **Fig.2.2** shows the relationship between the different tables in the database along with each table's data attributes and their primary key.
 
-## UML  Diagrams
+## UML  Diagram
 ![entity-relationship-diagram](./img/er-diagram.png)
 
 **Fig.2.3** shows the relationship between the different tables in the database along with each table's data attributes and their primary key.
+
+## WireFrame Diagram
+![wireframe-diagram](./img/wireframe.png)
+
+**Fig.2.4** shows the relationship between the different screens in kivymd.
 
 ## Flowcharts 
 ![entity-relationship-diagram](./img/er-diagram.png)
@@ -111,7 +116,8 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 4. [SQLite](#sqlite)
 5. [Coding principles](#principles)
     1. Don't Repeat Yourself (DRY) principle
-    2. Keep It Simlpe, Stupid (KISS) principle
+    2. Keep It Simple, Stupid (KISS) principle
+6. [Git and Github](#git)
 
 ## Development
 
@@ -228,12 +234,27 @@ class users(Base):
     def __repr__(self) -> str:
         return f"""id: {self.id},email: {self.email},username: {self.username},password: {self.password}, active: {self.active}"""
 ```
-The above code shows the usage of Object Relational Mapping using SQL Alchemy. The first 4 lines are the imports necessary to import SQL Alchemy to get it working. 
+The above code shows the usage of Object Relational Mapping using SQL Alchemy. The first 4 lines are the imports necessary to import SQL Alchemy to get it working. The users class is used to create a table called users with the columns id whihc is the primary key, email, username, password, and active which is a boolean for the current user. Below this, there is a __repr__ function which is used to create printable representation of the data stored in the table.
 
-<a name="sqlite"></a> SQLite
+<a name="sqlite"></a> 
+
+SQLite is used in the application as the database. The data entered by the user in the application is processed by SQL Alchemy and then stored in the SQLite database. The data is retrieved when the user trys to view the data and edited when the user wants to edit the data.
 
 <a name="principles"></a> Coding Principles
 
+KISS:
+
+The application is divided into classes for each screen or database table. The classes have methods with specific responsibilities. The code for connecting to database using SQL ALchemy is kept simple and easy to understand. In the following example, the simplicity of connecting and communicating with the database is clear. A query is created using SQL Alchemy and is executed in the database session. The result is stored in a res variable. 
+
+```py
+query = select(users.username).where(users.active == True)
+res = database_session.execute(query).fetchall()
+name = (general.str_clean(res))
+``` 
+
+Code that needs to be reused throughout classes are kept in a library folder and imported to the main python file and reused as neccesary: `py from library import verification, general `. Verification has password input verifying functionality that is used multiple times in the application and the general has general functions like cleanup strings (remove special chars), etc. 
+
+<a name="git"></a> Git and Github
 
 # <a name="functionality"></a> Criteria D: Functionality and Extensibility
 

@@ -1,13 +1,14 @@
 ScreenManager:
     id:screenmanager
-    AddItems:
-        name: "AddItems"
+  
     Login:
         name: "Login"
     Register:
         name: "Register" 
     Dashboard:
         name: "Dashboard"
+    AddItems:
+        name: "AddItems"
     ViewFridge:
         name: "ViewFridge"
 
@@ -287,6 +288,17 @@ ScreenManager:
                 mode: "rectangle"
                 icon_right: "account"
 
+            MDTextField:
+                id: quantity
+                hint_text: 'Item Quantity'
+                helper_text: 'Please enter an Item Amount'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "numeric"
+
             MDBoxLayout:
                 orientation: "horizontal"
                 size_hint: 1,.2
@@ -296,7 +308,7 @@ ScreenManager:
                     orientation: "vertical"
                     size_hint: 1,1
                     MDLabel:
-                        font_size : 30
+                        font_size : 25
                         font_name: "Arial"
                         text: "Category"
                         pos_hint: {"center_y":.5}
@@ -377,7 +389,7 @@ ScreenManager:
                 line_color_normal: '#ffffff'
                 helper_text_mode: 'on_error'
                 mode: "rectangle"
-                icon_right: "account"
+                icon_right: "calendar-range"
                 on_focus:
                     # root.show_date_picker() if self.focus else root.close_dialog()
                     root.show_date_picker()

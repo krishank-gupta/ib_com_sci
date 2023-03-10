@@ -89,15 +89,40 @@ $\qquad$ When it comes to Databases, there are various options like SQL, Postgre
 |       n      | Work on Fridge Items Display system | Have the fridge screen display all items and make it deletable and editable  |       30 minutes       |        28th Feb 2023        |       X       |
 
 ## Record of Tasks
-| **Task No.** |  **Planned Action** |          **Planned Outcome**         | **Time Estimate** | **Target Completion Date** | **Criterion** |
-|:------------:|:-------------------:|:------------------------------------:|:-----------------:|:--------------------------:|:-------------:|
-|       1      | Meeting with client | Start collecting context for problem |       6 min       |        7th Feb 2023        |       A       |
-|       2      | Create problem defination | Have the client's problem defined |       25 min       |        9th Feb 2023        |       A       |
-|       3      | Create success criterias | Have the success criteria of the application that solved the client's problems |       1 hours       |        15th Feb 2023        |       A       |
-|       4      | Present success criteria to client | Have the success criteria of the application aprooved by the client |       10 minutes       |        28th Feb 2023        |       A       |
-|       5      | Write rationale | Have the tools used in the application explained and justified |       30 minutes       |        28th Feb 2023        |       A       |
-|       n      | Work on Fridge Items Display system | Have the fridge screen display all items and make it deletable and editable  |       30 minutes       |        28th Feb 2023        |       X       |
 
+| **Task No** |                 **Planned Action**                 |                                        **Planned Outcome**                                       | **Time Estimate** | **Target Completion Date** | **Criterion** |
+|:-----------:|:--------------------------------------------------:|:------------------------------------------------------------------------------------------------:|:-----------------:|:--------------------------:|:-------------:|
+|      1      |                 Meeting with client                |                               Start collecting context for problem                               |       6 min       |        7th Feb 2023        |       A       |
+|      2      |              Create problem defination             |                                 Have the client's problem defined                                |       25 min      |        9th Feb 2023        |       A       |
+|      3      |              Create success criterias              |          Have the success criteria of the application that solved the client's problems          |      1 hours      |        15th Feb 2023       |       A       |
+|      4      |         Present success criteria to client         |                Have the success criteria of the application approved by the client               |     10 minutes    |        28th Feb 2023       |       A       |
+|      5      |        Write rationale and proposed solution       |                  Have the tools used in the application explained and justified                  |     45 minutes    |        18th Feb 2023       |       A       |
+|      6      |  Present rationale and proposed solution to client |                         Have the proposed solution approved by the client                        |     10 minutes    |        28th Feb 2023       |       A       |
+|      7      |          Create and explain system diagram         |              Design and explain a system diagram to represent the application system             |     25 minutes    |        21st Feb 2023       |       B       |
+|      8      |           Create Entity Relation Diagram           |                       Create and explain relations between database tables                       |     20 minutes    |        23rd Feb 2023       |       B       |
+|      9      |                 Create UML Diagram                 |                Create and explain the relation between different classes in python               |     40 minutes    |        25th Feb 2023       |       B       |
+|      10     |       Start working on login system back-end       |               Have a working login system in place (python and database connection)              |      2 hours      |        25th Feb 2023       |       C       |
+|      11     |              Create WireFrame Diagram              |                          Show how the screens change in the application                          |     30 minutes    |        26th Feb 2023       |       B       |
+|      12     |                  Create Flowcharts                 |                              Explain how certain blocks of code work                             |     45 minutes    |        28th Feb 2023       |       B       |
+|      13     |     Create login and register screens in KivyMD    | Have the Graphic User Interface for Login and Register screens completed and connect to back-end |      2 hours      |        3rd Mar 2023        |       C       |
+|      14     |                  Design Test Plan                  |              Design an ellaborate plan for testing the application for possible bugs             |      2 hours      |        5th Mar 2023        |       B       |
+|      15     |             Research KivyMD components             |      Find great components that can be used in the application to improve the user interface     |      2 hours      |        5th Mar 2023        |       B       |
+|      16     |              Create Dashboard screen               |                 Create the Dashboard screen by refering to the wireframe diagram                 |       1 hour      |        6th Mar 2023        |       C       |
+|      17     |          Design a global footer in KivyMD          |             Have a footer on every screen that has the options to go back and log out            |      3 hours      |        4th Mar 2023        |       C       |
+|      18     |         Add "active" column to users table         |              Be able to see current user by having an active column in the database              |     20 minutes    |        6th Mar 2023        |       C       |
+|      19     |             Work on View Fridge screen             |            Have the fridge screen display all items and make it deletable and editable           |      2 hours      |        6th Mar 2023        |       C       |
+|      20     |                  Create snackbars                  |                  Present success and warning notifications to users as snackbars                 |     1.5 hours     |        7th Mar 2023        |       C       |
+|      21     |                  Update Test Plan                  |                                                ##                                                |      3 hours      |        7th Mar 2023        |       B       |
+|      22     |               Create add item screen               |                                     Have an add item screen                                      |      2 hours      |        8th Mar 2023        |       C       |
+|      23     |  Connect add item screen with database table items |                    Have items added on the add item screen add on the database                   |       1 hour      |        8th Mar 2023        |       C       |
+|      24     |          Add filters to view fridge screen         |                        Sort items in fridge based on owner, quantity, etc                        |       1 hour      |        8th Mar 2023        |       C       |
+|      25     |           Create hover effect for buttons          |                           Make buttons more visible with a hover effect                          |     1.5 hours     |        8th Mar 2023        |       C       |
+|      26     |        Create viewable password input fields       |                     Have password input fields viewable by the user on click                     |      2 hours      |        8th Mar 2023        |       C       |
+|      27     | Create swipe to delete item for view fridge screen |                                               Code                                               |       1 hour      |        9th Mar 2023        |       C       |
+|      28     |             Create video for criteria D            |                              Have a video showcasing the application                             |       1 hour      |        10th Mar 2023       |       D       |
+|      29     |               Finish record of tasks               |                                 Have a completed record of tasks                                 |       1 hour      |        10th Mar 2023       |       C       |
+|      30     |               Choose the color theme               |              Experiment color themes and hues and find the best fit for a fridge app             |     20 minutes    |        10th Mar 2023       |       C       |
+|      31     |                 Complete citations                 |                                         Finish citations                                         |       1 hour      |        10th Mar 2023       |       -       |
 
 # <a name="development"></a> Criteria C: Development
 

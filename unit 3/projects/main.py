@@ -38,15 +38,10 @@ class items(Base):
     __tablename__ = "items"
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    category = Column(String(250), unique=True, nullable=False)
+    category = Column(String(250),nullable=False)
     expiry = Column(String(300), nullable=False)
     quantity = Column(Integer, nullable=False)
     owner = Column(String(300), nullable=False)
-
-class logs(Base):
-    __tablename__ = "logs"
-    id = Column(Integer, primary_key=True)
-    action = Column(String(250), nullable=False)
 
 engine = create_engine('sqlite:///main.db')
 
@@ -62,8 +57,6 @@ database_session.query(users).update({users.active: False})
 # Simple Select all users query using SQL Alchemy
 query = select(users)
 res = database_session.execute(query).fetchall()
-print(res)
-
 
 class main(MDApp):
     def __init__(self, **kwargs):
@@ -87,11 +80,8 @@ class main(MDApp):
 
 class Login(MDScreen):
     def on_pre_enter(self, *args):
-        # return super().on_pre_enter(*args)
-        database_session.query(users).update({users.active: False})
-        self.ids.login_username.text = ""
-        self.ids.login_password.ids.text_field.text = ""
-
+        return super().on_pre_enter(*args)
+    
     def try_login(self):
 
         # get user entered username and password
@@ -99,13 +89,9 @@ class Login(MDScreen):
         password_field = self.ids.login_password
         password = password_field.ids.text_field.text
         
-        print("current username", username)
-        
         query = database_session.query(users).filter(users.username == username)
         registered_users = database_session.execute(query).fetchall()
         
-        print("reg users:", registered_users)
-
         db_pswd_query = database_session.query(users.password).filter(users.username == username)
         db_pswd = database_session.execute(db_pswd_query).fetchone()
         db_pswd = general.str_clean(db_pswd)
@@ -119,7 +105,6 @@ class Login(MDScreen):
         elif not registered_users:
             password_field.ids.text_field.error = True
             password_field.helper_text = "user not registered"
-            print("not registered")
 
         elif not db_pswd == password:
             password_field.ids.text_field.error = True
@@ -162,8 +147,6 @@ class Register(MDScreen):
         elif not verification.pswds_verify(first_pswd, second_pswd):
             password_field_verify.ids.text_field.error = True
         else:
-            print("registration success")
-            print(email, username, first_pswd, second_pswd)
 
             temp_user = users(email=email, username=username, password=first_pswd, active=True)
             
@@ -184,22 +167,32 @@ class Dashboard(MDScreen):
 
         self.ids.dashboard_title.text = f"Welcome {name}"
 
-        print(database_session.execute(select(users).where(users.active == True)).fetchall())
 
 class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
     def populate_list(self):
-        data = [1,2,3,4,5,6]
+        print("hi")
+        query = select(items)
+        res = database_session.execute(query).fetchall()
+        fridge = (general.str_clean(res))
+        print(fridge)
+
+        data = [1,2,3,4,5,6,7]
         for i in data:
             self.ids.md_list.add_widget(
                 SwipeToDeleteItem(text=str(i))
             )
 
 class AddItems(MDScreen):
+    # def on_pre_enter(self):
+    #     self.ids.item_name.text = ""
+    #     self.ids.quantity.text = ""
+    #     self.ids.item_date.text = ""
+
     def on_save(self, instance, value, date_range):
-        print(instance, value, date_range)
         self.ids.item_date.text=str(value)
         instance.dismiss(Force=True)
 
@@ -213,13 +206,42 @@ class AddItems(MDScreen):
         date_dialog.focus = True
 
     def on_cancel(self, instance, value):
-        print("cancelled")
         instance.dismiss()
 
     def checkbox_click(self, checkbox, value, category):
         if value:  # if the check is true
             self.selected_category = category
-            print(f"{category} is selected,checkbox:{checkbox},value:{value}")
+
+    def register(self):
+        # Get data from the add item screen form submission
+        item_name = self.ids.item_name.text
+        item_quantity = self.ids.quantity.text
+        expiry = self.ids.item_date.text
+
+        # get current logged in user name:
+        query = select(users.username).where(users.active == True)
+        res = database_session.execute(query).fetchall()
+        current_user = (general.str_clean(res))
+    
+        temp_item = items(name=item_name, category=self.selected_category, expiry=expiry, quantity=item_quantity, owner=current_user)    
+        database_session.add(temp_item)
+        database_session.commit()
+
+        snackbar = CustomSnackbar(
+            text="Item added!",
+            snackbar_x="10dp",
+            snackbar_y="10dp",
+            icon="information",
+            bg_color=(66/254, 186/254, 150/254, 1),
+        )
+            
+        snackbar.size_hint_x = (
+            Window.width - (snackbar.snackbar_x * 2)
+        ) / Window.width
+        snackbar.open()
+
+        self.parent.current = 'Dashboard'
+
 
 class CustomSnackbar(BaseSnackbar):
     text = StringProperty(None)

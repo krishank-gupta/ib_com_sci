@@ -1,0 +1,493 @@
+ScreenManager:
+    id:screenmanager
+    AddItems:
+        name: "AddItems"
+    Login:
+        name: "Login"
+    Register:
+        name: "Register" 
+    Dashboard:
+        name: "Dashboard"
+    ViewFridge:
+        name: "ViewFridge"
+
+<Login>:
+    name: "Login"
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .5}
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        BoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Welcome to FreshTrack            Please login to continue'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: login_username
+                hint_text: 'Username'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text: 'Required'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+            
+            ClickableTextFieldRound:
+                id: login_password
+                hint_text: "Password"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                helper_text: "Required"
+
+            HoverButton:
+                text: 'Login'
+                icon: 'login'
+                size_hint: (0.4, 0.25)
+                pos_hint: {"center_x": .5}
+                on_press: root.try_login()
+
+            RectangleHoverButton:
+                text: "Need an account? Register"
+                icon: "account"
+                line_color: 0, 0, 0, 0
+                size_hint: 0.5, None
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: app.root.current = "Register"
+
+<Register>:
+    name: "Register"
+
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .5}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Register'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: register_email
+                hint_text: 'Email'
+                helper_text: 'Please enter a valid email address'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "email"
+
+            MDTextField:
+                id: register_username
+                hint_text: 'Username'
+                helper_text: 'Please enter a username'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+
+            ClickableTextFieldRound:
+                id: register_password
+                hint_text: "Password"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                helper_text: "Required"
+
+            ClickableTextFieldRound:
+                id: register_password_verify
+                hint_text: "Password"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                helper_text: "Match"
+
+            HoverButton:
+                text: "Register"
+                icon: "account"
+                line_color: 0, 0, 0, 0
+                size_hint: (0.4, 0.25)
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: root.register()
+
+
+            RectangleHoverButton:
+                text: "Back to Login?"
+                icon: "login"
+                line_color: 0, 0, 0, 0
+                size_hint: 0.5, None
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: app.root.current = "Login"
+
+<Dashboard>
+    id: dashboard
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 450, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        # elevation: 5
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            orientation: "vertical"
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                pos_hint: {"center_x": .5, "center_y": .1}
+                size_hint: 1,.4
+
+                MDLabel:
+                    id: dashboard_title
+                    text: 'Dashboard'
+                    font_style: 'H3'
+                    font_size: 40
+                    halign: 'center'
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                pos_hint: {"center_x": .5, "center_y": .99}
+                padding: '12dp'
+                spacing: '10dp'
+                size_hint: 1,.6
+
+                HoverButton:
+                    text: 'View Fridge'
+                    icon: 'eye'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    on_press: app.root.current = "ViewFridge"
+
+                HoverButton:
+                    text: 'Add items'
+                    icon: 'plus'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .5}
+                    on_press: app.root.current = "AddItems"
+                
+                HoverButton:
+                    text: 'Log Out'
+                    icon: 'logout'
+                    size_hint: .6,.2
+                    font_size: "20dp"
+                    pos_hint: {"center_x": .5}
+                    on_press: app.root.current = "Login"
+
+    CustomTopAppBar:
+        titletext: "Dashboard"
+
+<ViewFridge>
+    name: "ViewFridge"        
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 750, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            id: fridge
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDBoxLayout:
+                size_hint: 1,.3
+
+
+                MDLabel:
+                    text: 'View fridge'
+                    font_style: 'H3'
+                    font_size: 40
+                    halign: 'center'
+
+            MDBoxLayout:
+                size_hint: 1,.7
+
+                MDScrollView:
+                    MDList:
+                        id: md_list
+                        padding: 0
+                        on_parent: root.populate_list()
+
+    CustomTopAppBar:
+        titletext: "View Fridge"
+
+<AddItems>
+    id: AddItems
+
+    BoxLayout:
+        orientation: 'vertical'
+        FitImage:
+            source:"img.png"
+
+    MDCard:
+        size_hint: None, None
+        size: 750, 450
+        pos_hint: {"center_x": .5, "center_y": .55}
+        md_bg_color: 0/255, 0/255, 0/255,0.6
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "12dp"
+            spacing: "12dp"
+
+            MDLabel:
+                text: 'Add Item'
+                font_style: 'H3'
+                font_size: 40
+                halign: 'center'
+
+            MDTextField:
+                id: item_name
+                hint_text: 'Item Name'
+                helper_text: 'Please enter an Item Name'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint: 1,.2
+
+                MDBoxLayout:
+                    pos_hint: {"center_y":.5}
+                    orientation: "vertical"
+                    size_hint: 1,1
+                    MDLabel:
+                        font_size : 30
+                        font_name: "Arial"
+                        text: "Category"
+                        pos_hint: {"center_y":.5}
+                        halign:"center"
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: meat
+                        group: 'group1' #this group is so that all the checkboxes are linked and only one can be selected
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        active: True
+                        on_active: root.checkbox_click(self, self.active, "Meat")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Meat'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: dairy
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "dairy")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Dairy'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: fruits
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "fruits")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Fruits'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: veggies
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "veggies")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Veggies'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+                MDBoxLayout:
+                    MDCheckbox:
+                        id: drinks
+                        group: 'group1'
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        on_active: root.checkbox_click(self, self.active, "Drinks")
+                        pos_hint: {"center_y":.5}
+                    MDLabel:
+                        text: 'Drinks'
+                        font_size:20
+                        pos_hint: {"center_y":.5}
+
+            MDTextField:
+                id: item_date
+                hint_text: 'Expiry'
+                helper_text: 'Please enter an expiry Name'
+                icon_right_color_normal: '#ffffff'
+                hint_text_color_normal: '#ffffff'
+                line_color_normal: '#ffffff'
+                helper_text_mode: 'on_error'
+                mode: "rectangle"
+                icon_right: "account"
+                on_focus:
+                    # root.show_date_picker() if self.focus else root.close_dialog()
+                    root.show_date_picker()
+
+            HoverButton:
+                text: "Add"
+                icon: "plus"
+                line_color: 0, 0, 0, 0
+                size_hint: (0.4, 0.25)
+                height: 40
+                pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+                on_press: root.register()
+        
+    CustomTopAppBar:
+        titletext: "Add Item"
+
+
+<CustomSnackbar>
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+
+        opposite_colors: False
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: root.font_size
+        theme_text_color: 'Custom'
+        text_color: 'ffffff'
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}
+
+  
+<CustomTopAppBar>:
+    id: custom_footer
+    MDBottomAppBar:
+        MDTopAppBar:
+            icon: "fridge-outline"
+            type: "bottom"
+            title: root.titletext
+            left_action_items: [["arrow-left", lambda x: app.goback(), "Dashboard", ""]]
+            right_action_items: [["logout", lambda x: app.logout(), "Logout", ""]]
+    
+<SwipeToDeleteItem>:
+    size_hint_y: None
+    id: swipe_to_delete_item  # add id here
+    height: content.height
+
+    MDCardSwipeLayerBox:
+        padding: "8dp"
+
+        MDIconButton:
+            icon: "trash-can"
+            pos_hint: {"center_y": .5}
+            on_release: root.remove_item(swipe_to_delete_item)  # pass the widget instance
+
+        MDIconButton:
+            icon: "square-edit-outline"
+            pos_hint: {"center_y": .5}
+            on_release: root.edit_item(swipe_to_delete_item)  # pass the widget instance
+
+    MDCardSwipeFrontBox:
+
+        OneLineListItem:
+            id: content
+            text: root.text
+            _no_ripple_effect: True
+
+        OneLineListItem:
+            id: content
+            text: root.text
+            _no_ripple_effect: True
+
+<HoverButton>:
+    id: hello
+    pos_hint: {"center_x": .5}
+
+<RectangleHoverButton>:
+    id: rectangleHoverButton
+
+
+<ClickableTextFieldRound>:
+    size_hint_y: None
+    height: text_field.height
+
+    MDTextField:
+        id: text_field
+        hint_text: root.hint_text
+        text: root.text
+        password: True
+        # helper_text: 'Required'
+        helper_text: root.helper_text
+        helper_text_mode: 'on_error'
+        mode: "rectangle"
+        hint_text_color_normal: '#ffffff'
+        line_color_normal: '#ffffff'
+        on_focus:
+            root.tryingg() if self.focus else root.unfocus()
+
+    MDIconButton:
+        id:eye_btns
+        icon: "eye-off"
+        # icon_color: "#ffffff"
+        # icon_color: app.theme_cls.primary_color
+        pos_hint: {"center_y": .5}
+        pos: text_field.width - self.width + dp(6), 10
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            text_field.password = False if text_field.password is True else True

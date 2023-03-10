@@ -1,14 +1,14 @@
 ScreenManager:
     id:screenmanager
   
-    ViewFridge:
-        name: "ViewFridge"
     Login:
         name: "Login"
     Register:
         name: "Register" 
     Dashboard:
         name: "Dashboard"
+    ViewFridge:
+        name: "ViewFridge"
     AddItems:
         name: "AddItems"
     
@@ -190,7 +190,9 @@ ScreenManager:
                     icon: 'eye'
                     size_hint: .6,.2
                     font_size: "20dp"
-                    on_press: app.root.current = "ViewFridge"
+                    on_press: 
+                        app.root.current = "ViewFridge"
+
 
                 HoverButton:
                     text: 'Add items'
@@ -248,7 +250,7 @@ ScreenManager:
                     MDList:
                         id: md_list
                         padding: 0
-                        on_parent: root.populate_list()
+                        # on_parent: root.populate_list()
 
     CustomTopAppBar:
         titletext: "View Fridge"

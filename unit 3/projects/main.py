@@ -93,13 +93,17 @@ class Login(MDScreen):
         password_field = self.ids.login_password
         password = password_field.ids.text_field.text
         
+        # get registered users from database
         query = database_session.query(users).filter(users.username == username)
         registered_users = database_session.execute(query).fetchall()
         
+        # get password for the user
         db_pswd_query = database_session.query(users.password).filter(users.username == username)
         db_pswd = database_session.execute(db_pswd_query).fetchone()
         db_pswd = general.str_clean(db_pswd)
 
+
+        # verify login cases and show errors if verification fails
         if not verification.str_input_verify(username):
             self.ids.login_username.error = True
 
@@ -176,8 +180,8 @@ class ViewFridge(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def populate_list(self):
-        print("hi")
+    def on_pre_enter(self):
+        self.ids.md_list.clear_widgets()
         query2 = select(items)
         res2 = database_session.execute(query2).fetchall()
         data = (str((res2)).split("), ("))
@@ -190,7 +194,23 @@ class ViewFridge(MDScreen):
                     main += x
             self.ids.md_list.add_widget(
                 SwipeToDeleteItem(text=str(main))
-            )
+            )        
+
+    # def populate_list(self):
+    #     print("hi")
+    #     query2 = select(items)
+    #     res2 = database_session.execute(query2).fetchall()
+    #     data = (str((res2)).split("), ("))
+    #     print(data)
+    #     data.insert(0,"name category expiry quantity owner id")
+    #     for i in data:
+    #         main = ""
+    #         for x in i:
+    #             if x.isalnum() or x.isspace() or x=="-":
+    #                 main += x
+    #         self.ids.md_list.add_widget(
+    #             SwipeToDeleteItem(text=str(main))
+    #         )
 
 class AddItems(MDScreen):
     # def on_pre_enter(self):

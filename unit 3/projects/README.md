@@ -308,7 +308,7 @@ Git is used as version control in the development of this application. After eve
 
 # <a name="functionality"></a> Criteria D: Functionality and Extensibility
 
-A 4 min video demonstrating the proposed solution with narration
+[![Watch the video](https://img.youtube.com/vi/rSolojHxGe4/0.jpg)](https://youtu.be/rSolojHxGe4)
 
 # Citations
 

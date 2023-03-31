@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    
+    <div class="currency_container">
+        <h1>currency converter</h1>
+        <form method="get">
+            <p>
+                enter currency in usd
+                <input type="number" name="usd_value" id="">
+            </p>
+            <p>{{ data }}</p>
+            <input type="submit" value="Converter" class="c_button">
+        </form>
+    </div>
+
+    <div class="pass_container">
+        <h1>Password Checker</h1>
+        <form method="post">
+            <p>
+                enter your password
+                <input type="password" name="check_pass" id="">
+            </p>
+            <p>{{ data2 }}</p>
+            <input type="submit" value="Check" class="p_button">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+:root {
+    --primary_background: #fbf9f8 !important;
+    --primary_text_color: #000 !important;
+    --secondary_background: #000 !important;
+    --secondary_text_color: #fff !important;
+    --accent_color: #fff !important;
+}
+
+body {
+    color: #004210 !important;
+    background-color: var(--primary_background);
+}
+
+nav {
+    background-color: #fbf9f8 !important;
+    color: #004210 !important;
+}
+
+.nav-links a.active {
+    border-bottom: 4px solid #004210 !important;
+}
+
+.nav-logo a{
+    color: #004210 !important;
+}
+
+.nav-links a{
+    color: #004210 !important;
+}
+
+button {
+    background-color: #40625d !important;
+    border: none !important;
+}
+
+header {
+    background-color: #fbf9f8 !important;
+}
+
+.login_system_forms {
+    padding: 2rem;
+    background-color:#FF5722;
+    border: 1px solid black;
+    color: #333333 !important
+}
+
+.alert-danger {
+    background-color: #f44336 !important;
+}

@@ -1,0 +1,13 @@
+<h1>This is a secret page that nobody is supposed to see</h1>
+
+{% if users %}
+<h1>Users:</h1>
+<p>{{ users }}</p>
+
+{% endif %}
+
+{% if posts %}
+<h1>Posts:</h1>
+<p>{{ posts }}</p>
+
+{% endif %}

@@ -75,3 +75,5 @@ Outcome: found out they have trouble finding donors
 
 Purpose: Get problem defintion approved  
 Outcome: Problem definition was approved
+
+<https://stackoverflow.com/questions/52665707/how-do-i-implement-a-like-button-function-to-posts-in-python-flask>

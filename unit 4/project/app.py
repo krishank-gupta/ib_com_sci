@@ -1,33 +1,92 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import DateTime
+from sqlalchemy.sql import func
 import os 
 # from markupsafe import escape
 from static.library import hash_password, check_password
+from datetime import datetime
 
 # create the extension
 db = SQLAlchemy()
 # create the app
 app = Flask(__name__)
+adminUsername = "1"
 
 # configure the SQLite database, relative to the app instance folder
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
     app.root_path, 'database', 'database.db')# initialize the app with the extension
+app.secret_key = os.urandom(12)
 db.init_app(app)
 
 class Charity(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	email = db.Column(db.String, unique=True, nullable=False)
 	username = db.Column(db.String, unique=True, nullable=False)
 	password = db.Column(db.String, unique=True, nullable=False)
-	email = db.Column(db.String, unique=True, nullable=False)
+	posts = db.relationship('Posts', backref='author', lazy='dynamic')
+
+	def like_post(self, post):
+		if not self.has_liked_post(post):
+			like = PostLike(user_id=self.id, post_id=post.id)
+			db.session.add(like)
+
+	def unlike_post(self, post):
+		if self.has_liked_post(post):
+			PostLike.query.filter_by(
+				user_id=self.id,
+				post_id=post.id).delete()
+
+	def has_liked_post(self, post):
+		return PostLike.query.filter(
+			PostLike.user_id == self.id,
+			PostLike.post_id == post.id).count() > 0
 
 class Posts(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
-	name = db.Column(db.String, unique=True, nullable=False)
-	desc = db.Column(db.String, nullable=False)
+	user_id = db.Column(db.Integer, db.ForeignKey('charity.id'))
+	title = db.Column(db.String(1000), nullable=False) # Added this line
+	content = db.Column(db.String(1000), nullable=False)
+	category = db.Column(db.String(1000), nullable=False)
+	timestamp = db.Column(DateTime(timezone=True), default=func.now())
+	likes = db.relationship('PostLike', backref='post', lazy='dynamic')
+
+	def get_like_count(self):
+		return self.likes.count()
+
+class PostLike(db.Model):
+    __tablename__ = 'post_like'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('charity.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+
+# Define a custom decorator to check if the user is logged in
+def login_required(f):
+    def wrapper(*args, **kwargs):
+        if 'username' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    wrapper.__name__ = f.__name__
+    return wrapper
+
+def admin_privilege_required(f):
+	def wrapper(*args, **kwargs):
+		# print(session['username'])
+		if 'username' not in session or session['username'] != adminUsername:
+			return redirect(url_for('index'))
+		return f(*args, **kwargs)
+	wrapper.__name__ = f.__name__
+	return wrapper
 
 @app.route("/")
 def index():
-	return render_template("landing.html")
+	data =  []
+	posts = Posts.query.all()
+	for p in posts:
+		data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+		print(data)
+	return render_template("landing.html", data=data)
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -36,7 +95,7 @@ def signup():
 		signup_email = request.form['signup_email']
 		signup_username = request.form['signup_username']
 		signup_password = hash_password(request.form['signup_password'])
-		print(signup_email, signup_username, signup_password)
+		# print(signup_email, signup_username, signup_password)
 		u = Charity(email=signup_email, username=signup_username, password=signup_password)
 		db.session.add(u)
 		db.session.commit()
@@ -56,7 +115,8 @@ def login():
 		for charity in charities:
 			if charity.username == username and check_password(password, charity.password):
 				message = "success"
-				return redirect(url_for('show_user_profile', username=username))
+				session['username'] = username
+				return redirect(url_for('show_user_profile'))
 			else:
 				message = "error"
 				error = True
@@ -64,20 +124,75 @@ def login():
 	else:
 		return render_template("login.html", message=message, error=error)
 	
-@app.route('/user/<username>')
-def show_user_profile(username):
+@app.route('/dashboard')
+@login_required
+def show_user_profile():
     # show the user profile for that user
-    return render_template('dashboard.html', username=username)
+	# data =  []
+	# posts = Posts.query.all()
+	# for p in posts:
+	# 	data.append((p.id, p.author.username, p.title, p.get_like_count()))
+	# print(data)
+	return render_template('dashboard.html', username=session['username'])
+
+@app.route('/new_post', methods=['GET', 'POST'])
+@login_required
+def new_post():
+	if request.method == 'POST':
+		username = session.get('username')
+		title = request.form['title']
+		content = request.form['content']
+		category = request.form['category']
+		user = Charity.query.filter_by(username=username).first()
+		p = Posts(title=title, author=user, content=content, category=category)
+		db.session.add(p)
+		db.session.commit()
+		return render_template('add_post.html')
+	else:
+		return render_template('add_post.html')
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     # show the post with the given id, the id is an integer
-    return f'Post {post_id}'
+	post = Posts.query.filter_by(id=post_id).first()
+	return f'title: {post.title} author: {post.author.username} likes: {post.get_like_count()}'
+
+@app.route('/post/<int:post_id>/<action>')
+@login_required
+def like_action(post_id, action):
+    post = Posts.query.filter_by(id=post_id).first_or_404()
+    current_user = session.get('username')
+    user = Charity.query.filter_by(username=current_user).first()
+    if action == 'like':
+        user.like_post(post)
+        db.session.commit()
+    if action == 'unlike':
+        user.unlike_post(post)
+        db.session.commit()
+    return "success"
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
 
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
+
+@app.route('/admin')
+@admin_privilege_required
+def admin():
+	user_data = []
+	post_data = []
+	users = Charity.query.all()
+	for user in users:
+		user_data.append(f"username: {user.username}, id: {user.id}")
+	posts = Posts.query.all()
+	for post in posts:
+		post_data.append(f'title: {post.title} author: {post.author.username} likes: {post.get_like_count()}')
+	return render_template('admin.html', users=user_data, posts=post_data)
 
 with app.app_context():
 	db.create_all()

@@ -23,18 +23,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/">givehub</a>
-            </div>
-            <ul class="nav-links">
-                <li><a class="active" href="/">Home</a></li>
-                <li><a href="/posts">Posts</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </div>
-    </nav>
+    {% include 'nav_logged_in.html' if 'username' in session else 'nav_not_logged_in.html' %}
+
     {% block content %}{% endblock %}
 </body>
 </html>

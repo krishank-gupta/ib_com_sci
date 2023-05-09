@@ -4,8 +4,20 @@
 
 {% block content %}
 
-<header>
-
-</header>
+your posts:
+    {% if data %}
+    {% for post in data %}
+    <section class="section-secondary">
+        <div class="col col-md-6">
+            <div class="card">
+                <h3 class="card-title">{{ post['title'] }}</h3>
+                <h6 class="card-title">by {{ post['user_id'] }}, on {{ post['timestamp'] }}. tags: {{ post['category'] }}</h6>
+                {{ post['content'] }}                
+                <h3 class="card-title">{{ post.get_like_count() }}</h3>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+{% endif %}
  
 {% endblock %}

@@ -18,6 +18,8 @@
     <p>See more examples of <a href="https://mustard-ui.com/docs/header">CSS Header Styles</a>.</p>
 </section>
 
+
+
 {% if data %}
     {% for post in data %}
     <section class="section-secondary">
@@ -28,9 +30,10 @@
                 {{ post[3] }}                
                 <ul class="card-actions">
                     <li>
-                        <button class="button-primary">
-                            <a href="/post/{{post[0]}}/like">Like</a>
-                        </button>
+                        <form action="{{ url_for('like_post') }}" method="post">
+                            <input type="hidden" name="post_id" value="{{ post[0] }}">
+                            <button type="submit">Like</button>
+                        </form>
                     </li>
                 </ul>
                 <h3 class="card-title">{{ post[6] }}</h3>

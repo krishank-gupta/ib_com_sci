@@ -23,19 +23,20 @@ class Charity(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	email = db.Column(db.String, unique=True, nullable=False)
 	username = db.Column(db.String, unique=True, nullable=False)
-	password = db.Column(db.String, unique=True, nullable=False)
+	password = db.Column(db.String, unique=False, nullable=False)
 	posts = db.relationship('Posts', backref='author', lazy='dynamic')
 
 	def like_post(self, post):
 		if not self.has_liked_post(post):
 			like = PostLike(user_id=self.id, post_id=post.id)
 			db.session.add(like)
-
-	def unlike_post(self, post):
-		if self.has_liked_post(post):
+			db.session.commit()
+		else:
 			PostLike.query.filter_by(
 				user_id=self.id,
 				post_id=post.id).delete()
+			db.session.commit()
+
 
 	def has_liked_post(self, post):
 		return PostLike.query.filter(
@@ -55,10 +56,10 @@ class Posts(db.Model):
 		return self.likes.count()
 
 class PostLike(db.Model):
-    __tablename__ = 'post_like'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('charity.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+	__tablename__ = 'post_like'
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('charity.id'), nullable=False)
+	post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
 
 # Define a custom decorator to check if the user is logged in
@@ -85,7 +86,6 @@ def index():
 	posts = Posts.query.all()
 	for p in posts:
 		data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
-		print(data)
 	return render_template("landing.html", data=data)
 
 @app.route("/signup", methods=['GET', 'POST'])
@@ -133,7 +133,11 @@ def show_user_profile():
 	# for p in posts:
 	# 	data.append((p.id, p.author.username, p.title, p.get_like_count()))
 	# print(data)
-	return render_template('dashboard.html', username=session['username'])
+	current_user = session.get('username')
+	user = Charity.query.filter_by(username=current_user).first()
+	posts = user.posts.all()
+	print(posts)
+	return render_template('dashboard.html', data=posts)
 
 @app.route('/new_post', methods=['GET', 'POST'])
 @login_required
@@ -157,19 +161,19 @@ def show_post(post_id):
 	post = Posts.query.filter_by(id=post_id).first()
 	return f'title: {post.title} author: {post.author.username} likes: {post.get_like_count()}'
 
-@app.route('/post/<int:post_id>/<action>')
+@app.route('/like', methods=['POST'])
 @login_required
-def like_action(post_id, action):
-    post = Posts.query.filter_by(id=post_id).first_or_404()
-    current_user = session.get('username')
-    user = Charity.query.filter_by(username=current_user).first()
-    if action == 'like':
-        user.like_post(post)
-        db.session.commit()
-    if action == 'unlike':
-        user.unlike_post(post)
-        db.session.commit()
-    return "success"
+def like_post():
+	post_id = request.form['post_id']
+	post = Posts.query.filter_by(id=post_id).first_or_404()
+	current_user = session.get('username')
+	user = Charity.query.filter_by(username=current_user).first()
+	print(user.id, post.id)
+	user.like_post(post)
+
+
+	return redirect(request.referrer)
+
 
 @app.route('/logout')
 def logout():

@@ -80,13 +80,27 @@ def admin_privilege_required(f):
 	wrapper.__name__ = f.__name__
 	return wrapper
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 def index():
-	data =  []
-	posts = Posts.query.all()
-	for p in posts:
-		data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
-	return render_template("landing.html", data=data)
+	data = []
+	
+	if request.method == 'POST':
+		category = request.form['category']
+		if not (category == "all"):
+			posts = Posts.query.filter_by(category=category).all()
+			for p in posts:
+				data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+			return render_template("landing.html", data=data, category=category)
+		else:
+			posts = Posts.query.all()
+			for p in posts:
+				data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+			return render_template("landing.html", data=data)
+	else:
+		posts = Posts.query.all()
+		for p in posts:
+			data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+		return render_template("landing.html", data=data)
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -179,6 +193,12 @@ def like_post():
 def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
+
+# @app.route('/search')
+# def search():
+#     query = request.args.get('query')
+#     posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
+#     return render_template('search_results.html', posts=posts)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -28,7 +28,7 @@ Flask is a suitable web framework for building a crowdfunding platform for educa
 ### Success Criteria
 
 1. __Clear categorization__: The website should clearly categorize charities based on their respective fields, such as education, health, poverty alleviation, and animal welfare, to help users find charities that align with their interests.
-2. __Search functionality__: The website should provide a search functionality that allows users to search for charities by category, name, or location, making it easier to find relevant charities.
+2. __Search functionality__: The website should provide a search functionality that allows users to search for charities by name or project name, making it easier to find relevant charities.
 3. __Device optimization__: The website should be optimized for all devices, ensuring that users can access and use the site on their smartphones, tablets, and laptops.
 4. __Like button__: The website should offer a like button that lets users express their support for a charity and see the number of likes a charity has received.
 5. __Charity metrics__: The website should provide charities with measurable metrics, such as the number of likes, profile views, and donate page clicks, to help them track their performance and make informed decisions.

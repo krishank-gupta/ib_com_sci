@@ -11,7 +11,7 @@ body {
     background-color: var(--primary_background);
 }
 
-nav {
+/* nav {
     background-color: #fbf9f8 !important;
     color: #004210 !important;
 }
@@ -26,7 +26,7 @@ nav {
 
 .nav-links a{
     color: #004210 !important;
-}
+} */
 
 button {
     background-color: #40625d !important;

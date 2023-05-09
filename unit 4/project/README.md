@@ -31,8 +31,8 @@ Flask is a suitable web framework for building a crowdfunding platform for educa
 2. __Search functionality__: The website should provide a search functionality that allows users to search for charities by name or project name, making it easier to find relevant charities.
 3. __Device optimization__: The website should be optimized for all devices, ensuring that users can access and use the site on their smartphones, tablets, and laptops.
 4. __Like button__: The website should offer a like button that lets users express their support for a charity and see the number of likes a charity has received.
-5. __Charity metrics__: The website should provide charities with measurable metrics, such as the number of likes, profile views, and donate page clicks, to help them track their performance and make informed decisions.
-6. __Site metrics__: The website should provide measurable metrics to the admin regarding the number of charities listed, number of monthly visits, number of visits and number of donate button clicks of each charity.
+5. __Charity metrics__: The website should provide charities with measurable metrics, such as the number of likes and number of projects listed, to help them track their performance and make informed decisions.
+6. __Site metrics__: The website should provide measurable metrics to the admin regarding the number of charities listed, number of monthly visits, number of projects listed, number of likes in each project.
 
 ## Criteria B
 

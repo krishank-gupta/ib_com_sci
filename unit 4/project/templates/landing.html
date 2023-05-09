@@ -18,23 +18,30 @@
     <p>See more examples of <a href="https://mustard-ui.com/docs/header">CSS Header Styles</a>.</p>
 </section>
 
-<form id="filter-form" method="POST">
-    <!-- <label for="sort-by">Sort by:</label>
-    <select id="sort-by" name="sort-by">
-        <option value="latest">Latest First</option>
-        <option value="oldest">Oldest First</option>
-    </select> -->
+<section>
+    <div class="row">
+        <div class="col-lg-6">
+            <form id="filter-form" method="POST">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="all">All</option>
+                    <option value="food">Food</option>
+                    <option value="water">Water</option>
+                    <option value="other">Other</option>
+                </select>
+            
+                <button type="submit">Filter</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form action="{{ url_for('search') }}" method="GET">
+                <input type="text" name="query">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
 
-    <label for="category">Category:</label>
-    <select id="category" name="category">
-        <option value="all">All</option>
-        <option value="food">Food</option>
-        <option value="water">Water</option>
-        <option value="other">Other</option>
-    </select>
-
-    <button type="submit">Filter</button>
-</form>
 
 {% if data %}
     {% for post in data %}

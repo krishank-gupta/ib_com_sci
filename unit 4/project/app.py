@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, or_
 from sqlalchemy.sql import func
 import os 
 # from markupsafe import escape
@@ -194,11 +194,11 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-# @app.route('/search')
-# def search():
-#     query = request.args.get('query')
-#     posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
-#     return render_template('search_results.html', posts=posts)
+@app.route('/search')
+def search():
+    query = request.args.get('query')
+    posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
+    return render_template('search-results.html', posts=posts)
 
 @app.errorhandler(404)
 def page_not_found(e):

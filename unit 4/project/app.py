@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime, or_
 from sqlalchemy.sql import func
 import os 
-# from markupsafe import escape
 from static.library import hash_password, check_password
 from datetime import datetime
 
@@ -19,6 +18,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
 app.secret_key = os.urandom(12)
 db.init_app(app)
 
+# Create table Charity
 class Charity(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	email = db.Column(db.String, unique=True, nullable=False)
@@ -26,6 +26,7 @@ class Charity(db.Model):
 	password = db.Column(db.String, unique=False, nullable=False)
 	posts = db.relationship('Posts', backref='author', lazy='dynamic')
 
+	# Add a new LikePost instance if the user has not liked the post
 	def like_post(self, post):
 		if not self.has_liked_post(post):
 			like = PostLike(user_id=self.id, post_id=post.id)
@@ -37,7 +38,7 @@ class Charity(db.Model):
 				post_id=post.id).delete()
 			db.session.commit()
 
-
+	# Check if user has liked the post of given ID
 	def has_liked_post(self, post):
 		return PostLike.query.filter(
 			PostLike.user_id == self.id,
@@ -141,12 +142,6 @@ def login():
 @app.route('/dashboard')
 @login_required
 def show_user_profile():
-    # show the user profile for that user
-	# data =  []
-	# posts = Posts.query.all()
-	# for p in posts:
-	# 	data.append((p.id, p.author.username, p.title, p.get_like_count()))
-	# print(data)
 	current_user = session.get('username')
 	user = Charity.query.filter_by(username=current_user).first()
 	posts = user.posts.all()
@@ -197,6 +192,7 @@ def logout():
 @app.route('/search')
 def search():
 	data = []
+	# Accept parameter query
 	query = request.args.get('query')
 	posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
 	for p in posts:
@@ -205,14 +201,16 @@ def search():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
+    # set the 404 status explicitly
     return render_template('404.html'), 404
 
 @app.route('/admin')
+# Only user with admin privilege can view this route
 @admin_privilege_required
 def admin():
 	user_data = []
 	post_data = []
+	# Query through all posts and users and send it to the front end
 	users = Charity.query.all()
 	for user in users:
 		user_data.append(f"username: {user.username}, id: {user.id}")

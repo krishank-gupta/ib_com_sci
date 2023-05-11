@@ -44,25 +44,33 @@ I propose to use Flask-SQL_Alchemy for Data Management as it is the Flask implem
 ## System Diagram
 
 ![System Diagram](./img/system_diagram.png)
+
 **Fig.2.1** shows the system diagram
 
 ## Entity Relationship Diagram
 
 ![ER Diagram](./img/er_diagram.png)
+
 **Fig.2.2** shows the relationship among the data tables.
 
 Visualization of the above ER Diagram:
 
 ![Visualization_Charity](./img/data_storage_example.png)
+
 **Fig.2.2.1** shows the Charity table and what data it stores
+
 ![Visualization_Posts](./img/data_storage_posts.png)
+
 **Fig.2.2.2** shows the Posts table and what data it stores
+
 ![Visualization_likePosts](./img/data_storage_likes.png)
+
 **Fig.2.2.3** shows the PostLike table and what data it stores
 
 ## WireFrame Diagram
 
 ![Wireframe](./img/wireframe.png)
+
 **Fig.2.3** shows the relationship among different routes in the application
 
 ## Flowcharts
@@ -70,11 +78,13 @@ Visualization of the above ER Diagram:
 ### Flowchart 1
 
 ![Flowchart_1](./img/flow-1.png)
+
 **Fig.2.4** represents the code for dashboard screen in flowchart
 
 ### Flowchart 2
 
 ![Flowchart_2](./img/flow-2.png)
+
 **Fig.2.5** represents the code for login screen in flowchart
 
 ## Test Plan
@@ -211,7 +221,7 @@ def search():
 	return render_template('search-results.html', data=data)
 ```
 
-The above code is used to implement a search feature in the application. It creates a /search endpoint which accepts a parameter query. The search keyword is accessed from the parameter using `reuest.args.get('')` and saved in the server. Then, the posts table is filtered through titles and content of the post using or_ which creates an 'or' gate. The posts that were found are saved in the posts vairable and looped through. The data inside each found post is saved in the data list and then sent to the front end.
+The above code is used to implement a search feature in the application. It creates a /search endpoint which accepts a parameter query. The search keyword is accessed from the parameter using `request.args.get('')` and saved in the server. Then, the posts table is filtered through titles and content of the post using or_ which creates an 'or' gate. The posts that were found are saved in the posts vairable and looped through. The data inside each found post is saved in the data list and then sent to the front end.
 
 A problem I faced during the search feature implementation was that the posts only filtered through the title or the content. A post with the search keyword in the title was not being displayed when filtered through the content. To solve this, I had to conduct a lot of research because I did not know there was a or_ function that could allow me to do this. Upon research, I found the or_ function (See Citation #9)
 
@@ -357,6 +367,7 @@ Logical Reasoning: The code includes conditional statements and logical operator
 # Criteria D
 
 [![Watch the video](https://img.youtube.com/vi/E8fkRtrR2J0/0.jpg)](https://youtu.be/E8fkRtrR2J0)
+
 **Fig.4.1** the video developed for an introduction of how the application works, success criteria, and test plan.
 
 # Citation

@@ -6,8 +6,7 @@
         <ul class="nav-links">
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/new_post">New Post</a></li>
-            <li><span>{{ session['username'] }}'s Account</span></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/logout">Logout from {{ session['username']}}</a></li>
         </ul>
     </div>
 </nav>

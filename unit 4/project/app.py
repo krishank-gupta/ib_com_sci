@@ -11,7 +11,7 @@ from datetime import datetime
 db = SQLAlchemy()
 # create the app
 app = Flask(__name__)
-adminUsername = "1"
+adminUsername = "sys_admin"
 
 # configure the SQLite database, relative to the app instance folder
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(
@@ -172,8 +172,8 @@ def new_post():
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     # show the post with the given id, the id is an integer
-	post = Posts.query.filter_by(id=post_id).first()
-	return f'title: {post.title} author: {post.author.username} likes: {post.get_like_count()}'
+	p = Posts.query.filter_by(id=post_id).first()
+	return f'({p.id}, {p.author.username}, {p.title}, {p.content}, {p.category}, {p.timestamp}, {p.get_like_count()})'
 
 @app.route('/like', methods=['POST'])
 @login_required
@@ -196,9 +196,12 @@ def logout():
 
 @app.route('/search')
 def search():
-    query = request.args.get('query')
-    posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
-    return render_template('search-results.html', posts=posts)
+	data = []
+	query = request.args.get('query')
+	posts = Posts.query.filter(or_(Posts.title.contains(query), Posts.content.contains(query))).all()
+	for p in posts:
+		data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+	return render_template('search-results.html', data=data)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -214,9 +217,10 @@ def admin():
 	for user in users:
 		user_data.append(f"username: {user.username}, id: {user.id}")
 	posts = Posts.query.all()
-	for post in posts:
-		post_data.append(f'title: {post.title} author: {post.author.username} likes: {post.get_like_count()}')
-	return render_template('admin.html', users=user_data, posts=post_data)
+	for p in posts:
+		post_data.append((p.id, p.author.username, p.title, p.content, p.category, p.timestamp, p.get_like_count()))
+	print(post_data)
+	return render_template('admin.html', users=user_data, post_data=post_data)
 
 with app.app_context():
 	db.create_all()

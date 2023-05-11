@@ -3,11 +3,21 @@
 {% if users %}
 <h1>Users:</h1>
 <p>{{ users }}</p>
-
 {% endif %}
 
-{% if posts %}
+<section>
+
+{% if post_data %}
 <h1>Posts:</h1>
-<p>{{ posts }}</p>
-
+    {% for post in post_data %}
+        <div class="col col-md-6">
+            <div class="card">
+                <h3 class="card-title">Title: {{ post[2] }}, ID: {{ post[0] }}</h3>
+                by {{ post[1] }}, on {{ post[5] }}. tags: {{ post[4] }}
+                Content: {{ post[3] }}                
+                <h3 class="card-title">Likes: {{ post[6] }}</h3>
+            </div>
+        </div>
+    {% endfor %}
 {% endif %}
+</section>

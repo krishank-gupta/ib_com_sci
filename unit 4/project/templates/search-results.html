@@ -5,11 +5,41 @@
 
 {% block content %}
 
+<section>
+
 <h1>Search Results</h1>
-<ul>
-  {% for post in posts %}
-    <li><a href="{{ url_for('show_post', post_id=post.id) }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+
+{% if data %}
+{% for post in data %}
+    <h1>
+        {% if category %}
+        {{ category }}
+        {% endif %}
+    </h1>
+    <div class="col col-md-6">
+        <div class="card">
+            <h3 class="card-title">
+              <a href="{{ url_for('show_post', post_id=post[0])}}">{{ post[2] }}</a>
+            </h3>
+            by {{ post[1] }}, on {{ post[5] }}. tags: {{ post[4] }}
+            <br><br><hr><br>
+            {{ post[3] }}                
+            <ul class="card-actions">
+                <li>
+                    <form action="{{ url_for('like_post') }}" method="post">
+                        <input type="hidden" name="post_id" value="{{ post[0] }}">
+                        <button type="submit">
+                            Like
+                        </button>
+                    </form>
+                </li>
+            </ul>
+            <h3 class="card-title">{{ post[6] }}</h3>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+
+</section>
  
 {% endblock %}

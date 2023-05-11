@@ -1,3 +1,4 @@
+
 <title>Welcome | GiveHub</title>
 
 {% extends "base.html" %}
@@ -18,58 +19,71 @@
     <p>See more examples of <a href="https://mustard-ui.com/docs/header">CSS Header Styles</a>.</p>
 </section>
 
-<section>
-    <div class="row">
-        <div class="col-lg-6">
-            <form id="filter-form" method="POST">
-                <label for="category">Category:</label>
-                <select id="category" name="category">
-                    <option value="all">All</option>
-                    <option value="food">Food</option>
-                    <option value="water">Water</option>
-                    <option value="other">Other</option>
-                </select>
-            
-                <button type="submit">Filter</button>
-            </form>
-        </div>
-        <div class="col-lg-6">
-            <form action="{{ url_for('search') }}" method="GET">
-                <input type="text" name="query">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</section>
+<section class="section-secondary">
 
-
-{% if data %}
-    {% for post in data %}
-    <section class="section-secondary">
-        <h1>
-            {% if category %}
-            {{ category }}
-            {% endif %}
-        </h1>
-        <div class="col col-md-6">
-            <div class="card">
-                <h3 class="card-title">{{ post[2] }}</h3>
-                <h6 class="card-title">by {{ post[1] }}, on {{ post[5] }}. tags: {{ post[4] }}</h6>
-                {{ post[3] }}                
-                <ul class="card-actions">
-                    <li>
-                        <form action="{{ url_for('like_post') }}" method="post">
-                            <input type="hidden" name="post_id" value="{{ post[0] }}">
-                            <button type="submit">Like</button>
-                        </form>
-                    </li>
-                </ul>
-                <h3 class="card-title">{{ post[6] }}</h3>
+    <section>
+        <div class="row">
+            <div class="col">
+                <form id="filter-form" method="POST">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="food">Food</option>
+                        <option value="water">Water</option>
+                        <option value="health">Health</option>
+                        <option value="education">Education</option>
+                        <option value="inclusion-equality">Inclusion & Equality</option>
+                        <option value="climate">Climate</option>
+                        <option value="poverty_alleviation">Poverty Alleviation</option>
+                        <option value="animal_welfare">Animal Welfare</option>
+                        <option value="anti-Inequality">Anti-Inequality</option>
+                        <option value="trafficking">Trafficking</option>
+                        <option value="slavery">Slavery</option>
+                        <option value="other">Other</option>
+                    </select>
+                
+                    <button type="submit">Filter</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="{{ url_for('search') }}" method="GET">
+                    <label for="query">Search:</label>
+                    <input type="text" name="query">
+                    <button type="submit">Search</button>
+                </form>
             </div>
         </div>
     </section>
-    {% endfor %}
-{% endif %}
+
+    {% if data %}
+    <h1>
+        {% if category %}
+        {{ category }}
+        {% endif %}
+    </h1>
+        {% for post in data %}
+           
+            <div class="col col-md-6">
+                <div class="card">
+                    <h3 class="card-title">{{ post[2] }}</h3>
+                    by {{ post[1] }}, on {{ post[5] }}. tags: {{ post[4] }}
+                    <br><br><hr><br>
+                    {{ post[3] }}                
+                    <ul class="card-actions">
+                        <li>
+                            <form action="{{ url_for('like_post') }}" method="post">
+                                <input type="hidden" name="post_id" value="{{ post[0] }}">
+                                <button type="submit">
+                                    Like
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                    <h3 class="card-title">{{ post[6] }}</h3>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</section>
 
 <script>
     $(document).ready(function() {
